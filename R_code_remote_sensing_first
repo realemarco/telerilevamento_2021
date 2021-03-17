@@ -1,10 +1,31 @@
-# my first code created in R
-setwd("C:/lab/")
+#my first code created in R
+
 #install.packages("raster") 
 library(raster)
+#la funzione library richiama il pacchetto installato
+
+setwd("C:/lab/")
+#la funzione setwd dice a R da quale cartella prendere i dati
 
 p224r63_2011<-brick("p224r63_2011_masked.grd")
 #la funzione brick permette di importare dati raster in R
+p224r63_2011
 
 plot(p224r63_2011)
 #la funzione plot permette di visualizzare i dati
+
+cl<-colorRampPalette(c("black","grey","light grey")) (100)
+#la funzione colorRampPalette permette di plottare le singole bande e cambiarne il colore
+#la nostra gamma di colori comprenderà nero, grigio e bianco, che vanno inseriti tra virgolette
+#usiamo la c per dire ad R che racchiudiamo i colori per lo stesso oggetto
+#(100) è il numero di livelli tra un colore e l'altro
+
+plot(p224r63_2011, col=cl)
+#con questa funzione abbiamo cambiato la scala di colori con quella scelta
+
+#colour change -> new
+cl<-colorRampPalette(c("green","yellow","red"))(100)
+#bisogna sempre associare la funzione colorRampPalette ad un oggeto
+
+plot(p224r63_2011, col=cl)
+#col è un argomento della funzioe plot che serve a definire i colori, mettiamo poi = l'oggetto cl per cambiare il colore
