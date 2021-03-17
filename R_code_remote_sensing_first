@@ -4,5 +4,7 @@ setwd("C:/lab/")
 library(raster)
 
 p224r63_2011<-brick("p224r63_2011_masked.grd")
+#la funzione brick permette di importare dati raster in R
 
 plot(p224r63_2011)
+#la funzione plot permette di visualizzare i dati
