@@ -164,4 +164,62 @@ plotRGB(p224r63_2011, r=3, g=2, b=1, stretch="Lin")
 plotRGB(p224r63_2011, r=3, g=4, b=2, stretch="Lin")
 plotRGB(p224r63_2011, r=3, g=4, b=2, stretch="hist")
 
-#instalato RStoolbox
+#install.packages("RStoolbox")
+#installato RStoolbox
+
+###DAY 5
+#immagine del 1988 "p224r63_1988_masked.grd"
+
+library(raster)
+setwd("C:/lab/")
+p224r63_2011 <- brick("p224r63_2011_masked.grd")
+p224r63_2011
+
+# inseriamo anche l'immagine del 1988 (multitemporal set)
+
+p224r63_1988 <- brick("p224r63_1988_masked.grd")
+p224r63_1988
+#facciamo ora un plot dell'immagine del 1988
+plot(p224r63_1988)
+
+#facciamo ora un plot in RGB con le varie bande associate
+#Bande satellite Landsat
+#B1: blu
+#B2: verde
+#B3: rosso
+#B4: infrarosso vicino
+#B5: infrarosso medio
+#B6: infrarosso termico
+#B7: infrarosso medio
+
+plotRGB(p224r63_1988, r=3, g=2, b=1, stretch="Lin")
+#abbiamo associato per ogni componente la banda del colore corrispondente, così da avere colori "naturali"
+#il violetto che appare sono dei corpuscoli causati dal rumore
+
+plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="Lin")
+#così vediamo il NIR col rosso 
+#quindi la vegetazione ci appare rossa
+
+#confrontiamo ora le due immagini 2011 e 1988
+#usiamo la funzione par
+
+par(mfrow=c(2,1))
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin")
+plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="Lin")
+
+#plottiamo in una tabella 2x2 con confronto tra 1988 e 2011 usando uno stretch lin e hist
+par(mfrow=c(2,2))
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin")
+plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="Lin")
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="hist")
+plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="hist")
+
+pdf("1988_2011_lin_stretch.pdf")
+par(mfrow=c(2,2))
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin")
+plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="Lin")
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="hist")
+plotRGB(p224r63_1988, r=4, g=3, b=2, stretch="hist")
+dev.off()
+#dev.off() serve a chiudere il file così da salvarlo
+
