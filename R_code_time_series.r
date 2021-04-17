@@ -88,5 +88,7 @@ plotRGB(TGr, 2, 3, 4, stretch="Lin")
 #anche qui il blu è predominante, quindi anche qui l'immagine più recente (stavolta 2015) ci da valori più alti
 
 
+#per finire installiamo il pacchetto rasterVis
+#install.packages("rasterVis")
 
 
