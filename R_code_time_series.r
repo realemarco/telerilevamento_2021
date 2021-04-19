@@ -183,3 +183,12 @@ levelplot(melt_amount, col.regions=clb)
 
 #per prossima volta installare pacchetto knitr
 
+
+#LEZIONE DEL 14/04/21
+
+#il metadato è la descrizione del dato che andiamo ad utilizzare
+#Copernicus Global Land Service
+#tanti dataset per aree tematiche
+
+
+
