@@ -82,6 +82,63 @@ plot(rafc$map)
 
 #GRAND CANYON
 
+#LEZIONE DEL 23/04/21
+
+#esamineremo un RGB già processato
+#attraverso la riflettanza riusciremo a classificare la mineralogia del terreno
+#scarichiamo l'immagine del Solar Orbiter
+
+
+
+library(raster)
+library(RStoolbox)
+setwd("C:/lab/")
+
+#adesso carichiamo l'immagine
+#è un RGB formato da 3 livelli, quindi useremo la funzione brick
+
+gc<-brick("dolansprings_oli_2013088_canyon_lrg.jpg")
+
+#visualizziamo l'immagine RGB con la funzione plotRGB
+
+plotRGB(gc, r=1, g=2, b=3, stretch="lin")
+
+#se voglio "estendere" la visione dell'immagine posso usare un histogram stretch
+plotRGB(gc, r=1, g=2, b=3, stretch="hist")
+#in questo modo usiamo tutte le gamme possibili per visualizzare l'immagine
+
+#procediamo alla classificazione dell'immagine
+#sempre attraverso il Maximum-Likelyhood 
+#verranno selezionate dal software delle classi di pixel (il numero glielo diamo noi)
+#e ogni pixel verrà assegnato ad una classe dal software
+
+#usiamo la funzione unsuperClass (unsupervised classification) del pacchetto RStoolbox
+
+gcc2<-unsuperClass(gc,nClasses=2)
+
+gcc2
+
+#siamo interessati a plottare sia le classi che la mappa che verranno generati (usiamo il simbolo $)
+#eseguiamo il plot
+plot(gcc2$map)
+
+#a questo punto proviamo ad aumentare il numero di classi
+gcc4<-unsuperClass(gc,nClasses=4)
+plot(gcc4$map)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
