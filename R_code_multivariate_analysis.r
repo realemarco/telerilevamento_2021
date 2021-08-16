@@ -37,6 +37,7 @@ pairs(p224r63_2011)
 
 #ad es. B1 e B2 hanno un indice di 0.93 (molto correlate)
 
+#LEZIONE DEL 28/04/21
 
 
 
