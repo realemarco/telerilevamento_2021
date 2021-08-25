@@ -91,5 +91,22 @@ p224r63_2011res_pca <- rasterPCA(p224r63_2011res)
 summary(p224r63_2011res_pca$model)
 
 
+#(con 3 componenti abbiamo spiegato il 99,9% della variabilità)
+#la prima componente è sempre quella con più informazioni
+#in "proportion of variance" vediamo il contributo della variabilità per ogni componente
+
+#adesso facciamo il plot della mappa
+plot(p224r63_2011res_pca$map)
+#ci aspettiamo di vedere tante informazioni nella prima componente (PC1) e via via sempre meno nelle altre (nell'ultima solo rumore)
+
+p224r63_2011res_pca
+#vediamo un attimo le info che abbiamo dal dataset usato ora:
+#vediamo la "$call" , cioè la funzione usata (rasterPCA in questo caso)
+#associato a $ abbiamo gli altri elementi con le rispettive informazioni
+
+#a questo punto plottiamo in RGB tutta l'immagine
+plotRGB(p224r63_2011res_pca$map, r=1,g=2,b=3, stretch="Lin")
+
+
 
 
