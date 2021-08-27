@@ -72,6 +72,12 @@ difndvi<- ndvi1-ndvi2
 plot(difndvi, col=cld)
 
 #worldwide NDVI
+#come l’NDV varia all’interno del pianeta attraverso la funzione Levelplot
+
+#COPNDVI 
+#una media dei valori  dal  1999 fino 2017 per ogni 21 di giugno dell'NDVI a livello mondiale
+#il pacchetto rasterdiv -> cioè rasterdiversity (dentro ha il dataset copNDVI) 
+
 plot(copNDVI)
 #funzione per cambiare valori in altri valori
 #i pixel coi valori 253, 254, 255 (acqua) saranno settati come "NA"
