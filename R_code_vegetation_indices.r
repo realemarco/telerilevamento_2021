@@ -77,11 +77,22 @@ plot(difndvi, col=cld)
 #COPNDVI 
 #una media dei valori  dal  1999 fino 2017 per ogni 21 di giugno dell'NDVI a livello mondiale
 #il pacchetto rasterdiv -> cioè rasterdiversity (dentro ha il dataset copNDVI) 
+# install.packages("rasterdiv")
 
 plot(copNDVI)
-#funzione per cambiare valori in altri valori
+
+#"cbind" argomento funzione per cambiare valori in altri valori (o non valori)
+#usiamo la funzione "reclassify"
 #i pixel coi valori 253, 254, 255 (acqua) saranno settati come "NA"
 copNDVI <- reclassify(copNDVI, cbind(253:255, NA))
+
+#ora riplottiamo
 plot(copNDVI)
 #levelplot è media di valori per riga e colonna, utilizzo pacchetto rasterVis
+library(rasterVis)
+
 levelplot(copNDVI)
+
+#vediamo la varianza e come varia tra latitutine e longitudine
+#vediamo che abbiamo un picco a livello dell'equatore (maggiore luce)
+
