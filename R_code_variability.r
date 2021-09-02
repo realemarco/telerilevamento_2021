@@ -130,3 +130,22 @@ ggtitle("Standard deviation of PC1 by inferno colour scale")
 grid.arrange(p1,p2,p3, nrow=3)
 #in orizzontale
 grid.arrange(p1,p2,p3, nrow=1)
+
+
+
+#CONTINUO
+
+setwd("C:/lab/EN")
+library(raster)
+#scaricare cartella "EN"
+
+EN01 <- raster("EN_0001.png")
+cls <- colorRampPalette(c("red","pink","orange","yellow")) (200)
+plot(EN01, col=cls)
+
+EN13 <- raster("EN_0013.png")
+
+par(mfrow=c(3,1))
+plot(EN01, col=cls, main="NO2 in January")
+plot(EN13, col=cls, main="NO2 in March")
+plot(ENdif, col=cls, main="Difference (January - March)")
