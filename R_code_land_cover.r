@@ -82,3 +82,28 @@ s2<-164908
 prop2<- freq(d2c$map) / s2
 prop2
 #così facendo abbiamo proporzionato i valori dimensionali, in modo da essere più accurati
+
+
+#adesso creiamo una tabella/dataset per confrontare i dati pre e post deforestazione
+cover <- c("forest", "agriculture")
+percent_1992 <- c(89.83, 10.16)  #qui inseriamo i valori dei dati che abbiamo ottenuto da prop1
+percent_2006 <- c(52.06, 47.93)  #stessa cosa per prop2
+percentages <- data.frame(cover, percent_1992, percent_2006) #crea una tabella raggruppando in questo caso i dati di "cover" da percent_1992 e percent_2006
+percentages
+
+#LA TABELLA:
+#        cover percent_1992 percent_2006
+#1      forest        89.83        52.06
+#2 agriculture        10.16        47.93
+
+#con GGPLOT rappresentiamo il dato 
+par(mfrow=c(1,2))
+p1 <- ggplot(percentages, aes(x=cover, y=percent_2006, color=cover)) + geom_bar(stat="identity", fill="white")
+p2 <- ggplot(percentages, aes(x=cover, y=percent_1992, color=cover)) + geom_bar(stat="identity", fill="white")
+#ora scrivendo "p1" o "p2" ci verranno fuori dei grafici a barre con le percentuali di land cover
+p1
+p2
+
+#vediamo assieme i due grafici a barre
+grid.arrange(p1, p2, nrow=1)  
+#NON SI USA PAR PERCHE FUNZIONA PER I PLOT
