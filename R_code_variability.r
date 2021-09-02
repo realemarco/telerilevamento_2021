@@ -110,3 +110,23 @@ library(viridis) #necessario per queste funzioni
 # ggplot() + geom_raster(pc1sd5, mapping = aes(x = x, y = y, fill = layer)) + scale_fill_viridis(option ="magma")  + ggtitle("Standard deviation of PC1 by viridis colour scale")
 #Altre colorazioni per la mappa a tre variabili
 
+
+#creare colorramppalette predefinita direttamente tramite viridis
+p1<-ggplot() +
+geom_raster(focalpc1_sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis()
+#utilizzo colorramppalette "magma"
+p2<-ggplot() +
+geom_raster(focalpc1_sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis(option = "magma")  +
+ggtitle("Standard deviation of PC1 by magma colour scale")
+#utilizzo colorramppalette "inferno"
+p3<-ggplot() +
+geom_raster(focalpc1_sd5, mapping = aes(x = x, y = y, fill = layer)) +
+scale_fill_viridis(option = "inferno")  +
+ggtitle("Standard deviation of PC1 by inferno colour scale")
+#utilizzare un grid arrange diverso 
+#in verticale
+grid.arrange(p1,p2,p3, nrow=3)
+#in orizzontale
+grid.arrange(p1,p2,p3, nrow=1)
