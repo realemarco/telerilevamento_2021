@@ -35,14 +35,25 @@ plotRGB(y2019, r=1, g=2, b=3, stretch="lin")
 dev.off()
 
 #UNSUPERCLASS
-usc1987 <- unsuperClass(y1987, nClasses=3)
-usc1989 <- unsuperClass(y1989, nClasses=3)
-usc1994 <- unsuperClass(y1994, nClasses=3)
-usc1999 <- unsuperClass(y1999, nClasses=3)
-usc2004 <- unsuperClass(y2004, nClasses=3)
-usc2009 <- unsuperClass(y2009, nClasses=3)
-usc2014 <- unsuperClass(y2014, nClasses=3)
-usc2019 <- unsuperClass(y2019, nClasses=3)
+
+######TEST CLASSI###########
+#   usc19891 <- unsuperClass(y1989, nClasses=3)
+#   usc19892 <- unsuperClass(y1989, nClasses=4) #forse meglio 4 classi
+#   usc19893 <- unsuperClass(y1989, nClasses=5)
+#   par(mfrow=c(2,4))
+#   plot(usc19891$map)
+#   plot(usc19892$map) 
+#   plot(usc19893$map) 
+#########################################
+
+usc1987 <- unsuperClass(y1987, nClasses=4)
+usc1989 <- unsuperClass(y1989, nClasses=4)
+usc1994 <- unsuperClass(y1994, nClasses=4)
+usc1999 <- unsuperClass(y1999, nClasses=4)
+usc2004 <- unsuperClass(y2004, nClasses=4)
+usc2009 <- unsuperClass(y2009, nClasses=4)
+usc2014 <- unsuperClass(y2014, nClasses=4)
+usc2019 <- unsuperClass(y2019, nClasses=4)
 
 par(mfrow=c(2,4))
 plot(usc1987$map)
