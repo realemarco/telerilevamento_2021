@@ -10,8 +10,8 @@ y1994 <- brick("Yellowstone_19940925_lrg.jpg")
 y1999 <- brick("Yellowstone_19990923_lrg.jpg")
 y2004 <- brick("Yellowstone_20041006_lrg.jpg")
 y2009 <- brick("Yellowstone_20090902_lrg.jpg")
-y2014 <- brick("yellowstone_oli_2014291_lrg.jpg")
-y2019 <- brick ("yellowstone_oli_2019193_lrg.jpg")
+y2014 <- brick("Yellowstone_oli_2014291_lrg.jpg")
+y2019 <- brick ("Yellowstone_oli_2019193_lrg.jpg")
 
 y1987
 y1989
@@ -41,8 +41,8 @@ levelplot(y1994$Yellowstone_19940925_lrg.2)               ##
 levelplot(y1999$Yellowstone_19990923_lrg.2)            ###########NON PLOTTA TUTTO INSIEME
 levelplot(y2004$Yellowstone_20041006_lrg.2)               ##
 levelplot(y2009$Yellowstone_20090902_lrg.2)                  ##
-levelplot(y2014$yellowstone_oli_2014291_lrg.2)
-levelplot(y2019$yellowstone_oli_2019193_lrg.2)
+levelplot(y2014$Yellowstone_oli_2014291_lrg.2)
+levelplot(y2019$Yellowstone_oli_2019193_lrg.2)
 
 
 
@@ -53,8 +53,8 @@ p3<-levelplot(y1994$Yellowstone_19940925_lrg.2)
 p4<-levelplot(y1999$Yellowstone_19990923_lrg.2)
 p5<-levelplot(y2004$Yellowstone_20041006_lrg.2)
 p6<-levelplot(y2009$Yellowstone_20090902_lrg.2)
-p7<-levelplot(y2014$yellowstone_oli_2014291_lrg.2)
-p8<-levelplot(y2019$yellowstone_oli_2019193_lrg.2)
+p7<-levelplot(y2014$Yellowstone_oli_2014291_lrg.2)
+p8<-levelplot(y2019$Yellowstone_oli_2019193_lrg.2)
 grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8, nrow=4)
 #########################
 
