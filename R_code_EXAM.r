@@ -34,6 +34,45 @@ plotRGB(y2019, r=1, g=2, b=3, stretch="lin")
 
 dev.off()
 
+#####PROVA: plottare solo una banda#####
+plot(y2019$Yellowstone_oli_2019193_lrg.1) #funziona
+
+#plot solo prima banda (verde?)
+par(mfrow=c(2,4))
+plot(y1987$Yellowstone_19870805_lrg.1)
+plot(y1989$Yellowstone_19890802_lrg.1)
+plot(y1994$Yellowstone_19940925_lrg.1)
+plot(y1999$Yellowstone_19990923_lrg.1)
+plot(y2004$Yellowstone_20041006_lrg.1)
+plot(y2009$Yellowstone_20090902_lrg.1)
+plot(y2014$Yellowstone_oli_2014291_lrg.1)
+plot(y2019$Yellowstone_oli_2019193_lrg.1)
+
+
+#plot solo seconda banda (swir??)
+par(mfrow=c(2,4))
+plot(y1987$Yellowstone_19870805_lrg.2)
+plot(y1989$Yellowstone_19890802_lrg.2)
+plot(y1994$Yellowstone_19940925_lrg.2)
+plot(y1999$Yellowstone_19990923_lrg.2)
+plot(y2004$Yellowstone_20041006_lrg.2)
+plot(y2009$Yellowstone_20090902_lrg.2)
+plot(y2014$Yellowstone_oli_2014291_lrg.2)
+plot(y2019$Yellowstone_oli_2019193_lrg.2)
+
+#plot solo terza banda (nir??)
+par(mfrow=c(2,4))
+plot(y1987$Yellowstone_19870805_lrg.3)
+plot(y1989$Yellowstone_19890802_lrg.3)
+plot(y1994$Yellowstone_19940925_lrg.3)
+plot(y1999$Yellowstone_19990923_lrg.3)
+plot(y2004$Yellowstone_20041006_lrg.3)
+plot(y2009$Yellowstone_20090902_lrg.3)
+plot(y2014$Yellowstone_oli_2014291_lrg.3)
+plot(y2019$Yellowstone_oli_2019193_lrg.3)
+
+#funziona tutto, decidere quale banda usare per  analisi sulle zone incendiate
+
 par(mfrow=c(2,4))
 levelplot(y1987$Yellowstone_19870805_lrg.2)
 levelplot(y1989$Yellowstone_19890802_lrg.2)                  ##
