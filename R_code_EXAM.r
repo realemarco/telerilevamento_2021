@@ -34,6 +34,12 @@ plotRGB(y2019, r=1, g=2, b=3, stretch="lin")
 
 dev.off()
 
+####prova stretch####
+# par(mfrow=c(2,3))
+# plot(y1989, stretch="lin")
+# plot(y1989, stretch="hist")
+#con questo plot no differenza tra lin e hist stretch
+
 #####PROVA: plottare solo una banda#####
 plot(y2019$Yellowstone_oli_2019193_lrg.1) #funziona
 
