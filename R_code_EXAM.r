@@ -55,7 +55,7 @@ plot(y2014$Yellowstone_oli_2014291_lrg.1)
 plot(y2019$Yellowstone_oli_2019193_lrg.1)
 
 
-#plot solo seconda banda (swir??)
+#plot solo seconda banda (nir??)
 par(mfrow=c(2,4))
 plot(y1987$Yellowstone_19870805_lrg.2)
 plot(y1989$Yellowstone_19890802_lrg.2)
@@ -66,7 +66,7 @@ plot(y2009$Yellowstone_20090902_lrg.2)
 plot(y2014$Yellowstone_oli_2014291_lrg.2)
 plot(y2019$Yellowstone_oli_2019193_lrg.2)
 
-#plot solo terza banda (nir??)
+#plot solo terza banda (swir??)
 par(mfrow=c(2,4))
 plot(y1987$Yellowstone_19870805_lrg.3)
 plot(y1989$Yellowstone_19890802_lrg.3)
@@ -90,18 +90,18 @@ levelplot(y2014$Yellowstone_oli_2014291_lrg.2)
 levelplot(y2019$Yellowstone_oli_2019193_lrg.2)
 
 
+#PROVA GGPLOT##
+library(gridExtra)
+p1<-ggRGB(y1987, r=1, g=2, b=3, stretch="hist")
+p2<-ggRGB(y1989, r=1, g=2, b=3, stretch="hist")
+p3<-ggRGB(y1994, r=1, g=2, b=3, stretch="hist")
+p4<-ggRGB(y1999, r=1, g=2, b=3, stretch="hist")
+p5<-ggRGB(y2004, r=1, g=2, b=3, stretch="hist")
+p6<-ggRGB(y2009, r=1, g=2, b=3, stretch="hist")
+p7<-ggRGB(y2014, r=1, g=2, b=3, stretch="hist")
+p8<-ggRGB(y2019, r=1, g=2, b=3, stretch="hist")
+grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, nrow=2)
 
-#####PROVA############# (non funziona)
-p1<-levelplot(y1987$Yellowstone_19870805_lrg.2)
-p2<-levelplot(y1989$Yellowstone_19890802_lrg.2)
-p3<-levelplot(y1994$Yellowstone_19940925_lrg.2)
-p4<-levelplot(y1999$Yellowstone_19990923_lrg.2)
-p5<-levelplot(y2004$Yellowstone_20041006_lrg.2)
-p6<-levelplot(y2009$Yellowstone_20090902_lrg.2)
-p7<-levelplot(y2014$Yellowstone_oli_2014291_lrg.2)
-p8<-levelplot(y2019$Yellowstone_oli_2019193_lrg.2)
-grid.arrange(p1,p2,p3,p4,p5,p6,p7,p8, nrow=4)
-#########################
 
 #UNSUPERCLASS
 
