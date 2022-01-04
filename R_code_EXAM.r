@@ -10,8 +10,8 @@ y1994 <- brick("Yellowstone_19940925_lrg.jpg")
 y1999 <- brick("Yellowstone_19990923_lrg.jpg")
 y2004 <- brick("Yellowstone_20041006_lrg.jpg")
 y2009 <- brick("Yellowstone_20090902_lrg.jpg")
-y2014 <- brick("Yellowstone_oli_2014291_lrg.jpg")
-y2019 <- brick ("Yellowstone_oli_2019193_lrg.jpg")
+y2014 <- brick("yellowstone_oli_2014291_lrg.jpg")
+y2019 <- brick ("yellowstone_oli_2019193_lrg.jpg")
 
 y1987
 y1989
@@ -32,15 +32,38 @@ plotRGB(y2009, r=1, g=2, b=3, stretch="lin")
 plotRGB(y2014, r=1, g=2, b=3, stretch="lin")
 plotRGB(y2019, r=1, g=2, b=3, stretch="lin")
 
-dev.off()
+#PLOT RGB IN HISTOGRAM STRETCH#
+# par(mfrow=c(2,4))
+# plotRGB(y1987, r=1, g=2, b=3, stretch="hist")
+# plotRGB(y1989, r=1, g=2, b=3, stretch="hist")
+# plotRGB(y1994, r=1, g=2, b=3, stretch="hist")
+# plotRGB(y1999, r=1, g=2, b=3, stretch="hist")
+# plotRGB(y2004, r=1, g=2, b=3, stretch="hist")
+# plotRGB(y2009, r=1, g=2, b=3, stretch="hist")
+# plotRGB(y2014, r=1, g=2, b=3, stretch="hist")
+# plotRGB(y2019, r=1, g=2, b=3, stretch="hist")
 
-####prova stretch####
-# par(mfrow=c(2,3))
-# plot(y1989, stretch="lin")
-# plot(y1989, stretch="hist")
+#prova stretch
+par(mfrow=c(2,3))
+plot(y1989, stretch="lin")
+plot(y1989, stretch="hist")
 #con questo plot no differenza tra lin e hist stretch
 
-#####PROVA: plottare solo una banda#####
+#PROVARE LEVELPLOT!#
+
+#PROVA GGPLOT##
+library(gridExtra)
+p1<-ggRGB(y1987, r=1, g=2, b=3, stretch="hist")
+p2<-ggRGB(y1989, r=1, g=2, b=3, stretch="hist")
+p3<-ggRGB(y1994, r=1, g=2, b=3, stretch="hist")
+p4<-ggRGB(y1999, r=1, g=2, b=3, stretch="hist")
+p5<-ggRGB(y2004, r=1, g=2, b=3, stretch="hist")
+p6<-ggRGB(y2009, r=1, g=2, b=3, stretch="hist")
+p7<-ggRGB(y2014, r=1, g=2, b=3, stretch="hist")
+p8<-ggRGB(y2019, r=1, g=2, b=3, stretch="hist")
+grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, nrow=2)
+
+#####PROVA2 plottare solo una banda#####
 plot(y2019$Yellowstone_oli_2019193_lrg.1) #funziona
 
 #plot solo prima banda (verde?)
@@ -79,29 +102,9 @@ plot(y2019$Yellowstone_oli_2019193_lrg.3)
 
 #funziona tutto, decidere quale banda usare per  analisi sulle zone incendiate
 
-par(mfrow=c(2,4))
-levelplot(y1987$Yellowstone_19870805_lrg.2)
-levelplot(y1989$Yellowstone_19890802_lrg.2)                  ##
-levelplot(y1994$Yellowstone_19940925_lrg.2)               ##
-levelplot(y1999$Yellowstone_19990923_lrg.2)            ###########NON PLOTTA TUTTO INSIEME
-levelplot(y2004$Yellowstone_20041006_lrg.2)               ##
-levelplot(y2009$Yellowstone_20090902_lrg.2)                  ##
-levelplot(y2014$Yellowstone_oli_2014291_lrg.2)
-levelplot(y2019$Yellowstone_oli_2019193_lrg.2)
-
-
-#PROVA GGPLOT##
+#####PROVA############# (non funziona)
 library(gridExtra)
-p1<-ggRGB(y1987, r=1, g=2, b=3, stretch="hist")
-p2<-ggRGB(y1989, r=1, g=2, b=3, stretch="hist")
-p3<-ggRGB(y1994, r=1, g=2, b=3, stretch="hist")
-p4<-ggRGB(y1999, r=1, g=2, b=3, stretch="hist")
-p5<-ggRGB(y2004, r=1, g=2, b=3, stretch="hist")
-p6<-ggRGB(y2009, r=1, g=2, b=3, stretch="hist")
-p7<-ggRGB(y2014, r=1, g=2, b=3, stretch="hist")
-p8<-ggRGB(y2019, r=1, g=2, b=3, stretch="hist")
-grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, nrow=2)
-
+#########################
 
 #UNSUPERCLASS
 
@@ -124,15 +127,35 @@ usc2009 <- unsuperClass(y2009, nClasses=3)
 usc2014 <- unsuperClass(y2014, nClasses=3)
 usc2019 <- unsuperClass(y2019, nClasses=3)
 
+#########PROVA unsuperClass CON BANDA NIR#######
+# usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.2, nClasses=3)
+# usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.2, nClasses=3)
+# usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.2, nClasses=3)
+# usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.2, nClasses=3)     #NESSUN DATO IN PIU'
+# usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.2, nClasses=3)      ####COMPLETAMENTE INUTILE
+# usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.2, nClasses=3)
+# usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.2, nClasses=3)
+# usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.2, nClasses=3)
+##################
+
+cl<-colorRampPalette(c("black","yellow","green")) (100)
+
 par(mfrow=c(2,4))
-plot(usc1987$map)
-plot(usc1989$map)
-plot(usc1994$map)
-plot(usc1999$map)
-plot(usc2004$map)
-plot(usc2009$map)
-plot(usc2014$map)
-plot(usc2019$map)
+plot(usc1987$map, col=cl)
+plot(usc1989$map, col=cl)
+plot(usc1994$map, col=cl)
+plot(usc1999$map, col=cl)
+plot(usc2004$map, col=cl)
+plot(usc2009$map, col=cl)
+plot(usc2014$map, col=cl)
+plot(usc2019$map, col=cl)
+
+#difficile scegliere numero di classi.
+# a prescindere che siano 3 o 4 comunque non sembra esserci coerenza con la scala dei colori
+
+#COSE DA FARE
+# 1- capire numero di classi ottimale
+
 
 #CALCOLARE FREQ CLASSI
 
@@ -157,6 +180,8 @@ levelplot(TGr,pattern="lrg.2")  ###capire se il pattern funziona davvero per la 
 par(mfrow=c(2,4))
 plotRGB(TGr, r=1, g=2, b=3, stretch="hist")
 ############################################
+
+
 
 
 
