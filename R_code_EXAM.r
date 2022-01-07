@@ -127,15 +127,15 @@ usc2009 <- unsuperClass(y2009, nClasses=3)
 usc2014 <- unsuperClass(y2014, nClasses=3)
 usc2019 <- unsuperClass(y2019, nClasses=3)
 
-#########PROVA unsuperClass CON BANDA NIR#######
-# usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.2, nClasses=3)
-# usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.2, nClasses=3)
-# usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.2, nClasses=3)
-# usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.2, nClasses=3)     #NESSUN DATO IN PIU'
-# usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.2, nClasses=3)      ####COMPLETAMENTE INUTILE
-# usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.2, nClasses=3)
-# usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.2, nClasses=3)
-# usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.2, nClasses=3)
+#########PROVA unsuperClass CON BANDA VERDE#######
+ usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.1, nClasses=3)
+ usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.1, nClasses=3)
+ usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.1, nClasses=3)
+ usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.1, nClasses=3)     
+ usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.1, nClasses=3)     ##FORSE BANDA VERDE EVIDENZIA INCENDIO
+ usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.1, nClasses=3)
+ usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.1, nClasses=3)
+ usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.1, nClasses=3)
 ##################
 
 cl<-colorRampPalette(c("black","yellow","green")) (100)
@@ -158,6 +158,8 @@ plot(usc2019$map, col=cl)
 
 
 #CALCOLARE FREQ CLASSI
+plot(usc1987)
+freq(usc19879$map
 
 #TIME SERIES
 
@@ -180,8 +182,6 @@ levelplot(TGr,pattern="lrg.2")  ###capire se il pattern funziona davvero per la 
 par(mfrow=c(2,4))
 plotRGB(TGr, r=1, g=2, b=3, stretch="hist")
 ############################################
-
-
 
 
 
