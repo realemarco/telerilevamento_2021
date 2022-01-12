@@ -138,17 +138,87 @@ usc2019 <- unsuperClass(y2019, nClasses=3)
  usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.1, nClasses=3)
 ##################
 
-cl<-colorRampPalette(c("black","yellow","green")) (100)
+c1<-colorRampPalette(c("green","grey","purple")) (100)
+c2<-colorRampPalette(c("grey","green","purple")) (100)
+c3<-colorRampPalette(c("purple","grey","green")) (100)
+c4<-colorRampPalette(c("purple","green","grey")) (100)
+c5<-colorRampPalette(c("grey","purple","green")) (100)
+c6<-colorRampPalette(c("green","purple","grey")) (100)
 
 par(mfrow=c(2,4))
-plot(usc1987$map, col=cl)
-plot(usc1989$map, col=cl)
-plot(usc1994$map, col=cl)
-plot(usc1999$map, col=cl)
-plot(usc2004$map, col=cl)
-plot(usc2009$map, col=cl)
-plot(usc2014$map, col=cl)
-plot(usc2019$map, col=cl)
+plot(usc1987$map, col=c1)
+plot(usc1987$map, col=c2)
+plot(usc1987$map, col=c3)
+plot(usc1987$map, col=c4)
+plot(usc1987$map, col=c5)
+plot(usc1987$map, col=c6)
+
+par(mfrow=c(2,4))
+plot(usc1989$map, col=c1)
+plot(usc1989$map, col=c2)
+plot(usc1989$map, col=c3)
+plot(usc1989$map, col=c4)
+plot(usc1989$map, col=c5)
+plot(usc1989$map, col=c6)
+
+par(mfrow=c(2,4))
+plot(usc1994$map, col=c1)
+plot(usc1994$map, col=c2)
+plot(usc1994$map, col=c3)
+plot(usc1994$map, col=c4)
+plot(usc1994$map, col=c5)
+plot(usc1994$map, col=c6)
+
+par(mfrow=c(2,4))
+plot(usc1999$map, col=c1)
+plot(usc1999$map, col=c2)
+plot(usc1999$map, col=c3)
+plot(usc1999$map, col=c4)
+plot(usc1999$map, col=c5)
+plot(usc1999$map, col=c6)
+
+par(mfrow=c(2,4))
+plot(usc2004$map, col=c1)
+plot(usc2004$map, col=c2)
+plot(usc2004$map, col=c3)
+plot(usc2004$map, col=c4)
+plot(usc2004$map, col=c5)
+plot(usc2004$map, col=c6)
+
+par(mfrow=c(2,4))
+plot(usc2009$map, col=c1)
+plot(usc2009$map, col=c2)
+plot(usc2009$map, col=c3)
+plot(usc2009$map, col=c4)
+plot(usc2009$map, col=c5)
+plot(usc2009$map, col=c6)
+
+par(mfrow=c(2,4))
+plot(usc2014$map, col=c1)
+plot(usc2014$map, col=c2)
+plot(usc2014$map, col=c3)
+plot(usc2014$map, col=c4)
+plot(usc2014$map, col=c5)
+plot(usc2014$map, col=c6)
+
+par(mfrow=c(2,4))
+plot(usc2019$map, col=c1)
+plot(usc2019$map, col=c2)
+plot(usc2019$map, col=c3)
+plot(usc2019$map, col=c4)
+plot(usc2019$map, col=c5)
+plot(usc2019$map, col=c6)
+
+#########
+par(mfrow=c(2,4))
+plot(usc1987$map, col=c1)
+plot(usc1989$map, col=c1)
+plot(usc1994$map, col=c1)
+plot(usc1999$map, col=c1)
+plot(usc2004$map, col=c1)
+plot(usc2009$map, col=c1)
+plot(usc2014$map, col=c1)
+plot(usc2019$map, col=c1)
 
 #difficile scegliere numero di classi.
 # a prescindere che siano 3 o 4 comunque non sembra esserci coerenza con la scala dei colori
@@ -159,7 +229,18 @@ plot(usc2019$map, col=cl)
 
 #CALCOLARE FREQ CLASSI
 plot(usc1987)
-freq(usc19879$map
+
+freq(usc1987$map)
+freq(usc1989$map)
+freq(usc1994$map)
+freq(usc1999$map)
+freq(usc2004$map)
+freq(usc2009$map)
+freq(usc2014$map)
+oo<-str(freq(usc2019$map))
+plot(oo)
+
+
 
 #TIME SERIES
 
@@ -172,13 +253,18 @@ library(RStoolbox)
 rlist <- list.files (pattern="lrg")
 rlist
 import<-lapply(rlist,raster)
-import 
+import
 
 TGr<-stack(import)
 TGr
+
+plot(TGr)
+
+UT<-unsuperClass(TGr,nClasses=3)
+
 par(mfrow=c(2,4))
 levelplot(TGr,pattern="lrg.2")  ###capire se il pattern funziona davvero per la seconda banda
-
+levelplot(TGr$Yellowstone_19870805_lrg)
 par(mfrow=c(2,4))
 plotRGB(TGr, r=1, g=2, b=3, stretch="hist")
 ############################################
@@ -196,3 +282,19 @@ plotRGB(TGr, r=1, g=2, b=3, stretch="hist")
 
 #time series
 #vegetation index
+
+#PROVA LISTA TIME SERIES UNSUPERCLASS
+usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.1, nClasses=3)
+usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.1, nClasses=3)
+usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.1, nClasses=3)
+usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.1, nClasses=3)     
+usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.1, nClasses=3)     ##FORSE BANDA VERDE EVIDENZIA INCENDIO
+usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.1, nClasses=3)
+usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.1, nClasses=3)
+usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.1, nClasses=3)
+
+lista<-c(usc1987,usc1989, usc1994, usc1999, usc2004, usc2009, usc2014, usc2019)
+lista
+plot(lista$map) ####HA FUSO TUTTE LE IMMAGINI IN UN'UNICA IMMAGINE
+levelplot(lista$map, col.regions=c1) #LO STESSO QUI, COME PLOTTARLE SEPARATAMENTE MA CON CLASSI COERENTI?
+
