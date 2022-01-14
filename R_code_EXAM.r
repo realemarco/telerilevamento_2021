@@ -126,16 +126,16 @@ usc2004 <- unsuperClass(y2004, nClasses=3)
 usc2009 <- unsuperClass(y2009, nClasses=3)
 usc2014 <- unsuperClass(y2014, nClasses=3)
 usc2019 <- unsuperClass(y2019, nClasses=3)
-
+set.seed(42)
 #########PROVA unsuperClass CON BANDA VERDE#######
- usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.1, nClasses=3)
- usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.1, nClasses=3)
- usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.1, nClasses=3)
- usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.1, nClasses=3)     
- usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.1, nClasses=3)     ##FORSE BANDA VERDE EVIDENZIA INCENDIO
- usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.1, nClasses=3)
- usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.1, nClasses=3)
- usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.1, nClasses=3)
+ usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.1, nClasses=4)
+ usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.1, nClasses=4)
+ usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.1, nClasses=4)
+ usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.1, nClasses=4)     
+ usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.1, nClasses=4)     ##FORSE BANDA VERDE EVIDENZIA INCENDIO
+ usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.1, nClasses=4)
+ usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.1, nClasses=4)
+ usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.1, nClasses=4)
 ##################
 
 c1<-colorRampPalette(c("green","grey","purple")) (100)
@@ -146,99 +146,136 @@ c5<-colorRampPalette(c("grey","purple","green")) (100)
 c6<-colorRampPalette(c("green","purple","grey")) (100)
 
 par(mfrow=c(2,4))
-plot(usc1987$map, col=c1)
-plot(usc1987$map, col=c2)
+#plot(usc1987$map, col=c1)
+#plot(usc1987$map, col=c2)
 plot(usc1987$map, col=c3)
-plot(usc1987$map, col=c4)
-plot(usc1987$map, col=c5)
-plot(usc1987$map, col=c6)
+#plot(usc1987$map, col=c4)
+#plot(usc1987$map, col=c5)
+#plot(usc1987$map, col=c6)
 
-par(mfrow=c(2,4))
-plot(usc1989$map, col=c1)
-plot(usc1989$map, col=c2)
-plot(usc1989$map, col=c3)
-plot(usc1989$map, col=c4)
+#par(mfrow=c(2,4))
+#plot(usc1989$map, col=c1)
+#plot(usc1989$map, col=c2)
+#plot(usc1989$map, col=c3)
+#plot(usc1989$map, col=c4)
 plot(usc1989$map, col=c5)
-plot(usc1989$map, col=c6)
+#plot(usc1989$map, col=c6)
 
-par(mfrow=c(2,4))
-plot(usc1994$map, col=c1)
-plot(usc1994$map, col=c2)
-plot(usc1994$map, col=c3)
+#par(mfrow=c(2,4))
+#plot(usc1994$map, col=c1)
+#plot(usc1994$map, col=c2)
+#plot(usc1994$map, col=c3)
 plot(usc1994$map, col=c4)
-plot(usc1994$map, col=c5)
-plot(usc1994$map, col=c6)
+#plot(usc1994$map, col=c5)
+#plot(usc1994$map, col=c6)
 
-par(mfrow=c(2,4))
-plot(usc1999$map, col=c1)
+#par(mfrow=c(2,4))
+#plot(usc1999$map, col=c1)
 plot(usc1999$map, col=c2)
-plot(usc1999$map, col=c3)
-plot(usc1999$map, col=c4)
-plot(usc1999$map, col=c5)
-plot(usc1999$map, col=c6)
+#plot(usc1999$map, col=c3)
+#plot(usc1999$map, col=c4)
+#plot(usc1999$map, col=c5)
+#plot(usc1999$map, col=c6)
 
-par(mfrow=c(2,4))
-plot(usc2004$map, col=c1)
-plot(usc2004$map, col=c2)
-plot(usc2004$map, col=c3)
-plot(usc2004$map, col=c4)
-plot(usc2004$map, col=c5)
+#par(mfrow=c(2,4))
+#plot(usc2004$map, col=c1)
+#plot(usc2004$map, col=c2)
+#plot(usc2004$map, col=c3)
+#plot(usc2004$map, col=c4)
+#plot(usc2004$map, col=c5)
 plot(usc2004$map, col=c6)
 
-par(mfrow=c(2,4))
-plot(usc2009$map, col=c1)
-plot(usc2009$map, col=c2)
-plot(usc2009$map, col=c3)
-plot(usc2009$map, col=c4)
-plot(usc2009$map, col=c5)
+#par(mfrow=c(2,4))
+#plot(usc2009$map, col=c1)
+#plot(usc2009$map, col=c2)
+#plot(usc2009$map, col=c3)
+#plot(usc2009$map, col=c4)
+#plot(usc2009$map, col=c5)
 plot(usc2009$map, col=c6)
 
-par(mfrow=c(2,4))
-plot(usc2014$map, col=c1)
-plot(usc2014$map, col=c2)
+#par(mfrow=c(2,4))
+#plot(usc2014$map, col=c1)
+#plot(usc2014$map, col=c2)
 plot(usc2014$map, col=c3)
-plot(usc2014$map, col=c4)
-plot(usc2014$map, col=c5)
-plot(usc2014$map, col=c6)
+#plot(usc2014$map, col=c4)
+#plot(usc2014$map, col=c5)
+#plot(usc2014$map, col=c6)
 
-par(mfrow=c(2,4))
-plot(usc2019$map, col=c1)
-plot(usc2019$map, col=c2)
+#par(mfrow=c(2,4))
+#plot(usc2019$map, col=c1)
+#plot(usc2019$map, col=c2)
 plot(usc2019$map, col=c3)
-plot(usc2019$map, col=c4)
-plot(usc2019$map, col=c5)
-plot(usc2019$map, col=c6)
+#plot(usc2019$map, col=c4)
+#plot(usc2019$map, col=c5)
+#plot(usc2019$map, col=c6)
 
-#########
+########
+usc1987 <- unsuperClass(y1987, nClasses=4)
+usc1989 <- unsuperClass(y1989, nClasses=4)
+usc1994 <- unsuperClass(y1994, nClasses=4)
+usc1999 <- unsuperClass(y1999, nClasses=4)
+usc2004 <- unsuperClass(y2004, nClasses=4)
+usc2009 <- unsuperClass(y2009, nClasses=4)
+usc2014 <- unsuperClass(y2014, nClasses=4)
+usc2019 <- unsuperClass(y2019, nClasses=4)
+
+cc<-colorRampPalette(c("green","grey","orange","blue")) (100)
+
 par(mfrow=c(2,4))
-plot(usc1987$map, col=c1)
-plot(usc1989$map, col=c1)
-plot(usc1994$map, col=c1)
-plot(usc1999$map, col=c1)
-plot(usc2004$map, col=c1)
-plot(usc2009$map, col=c1)
-plot(usc2014$map, col=c1)
-plot(usc2019$map, col=c1)
+plot(usc1987$map, col=cc, main="LandCover Yellowstone 1987")
+plot(usc1989$map, col=cc, main="LandCover Yellowstone 1989")
+plot(usc1994$map, col=cc, main="LandCover Yellowstone 1994")
+plot(usc1999$map, col=cc, main="LandCover Yellowstone 1999")
+plot(usc2004$map, col=cc, main="LandCover Yellowstone 2004")
+plot(usc2009$map, col=cc, main="LandCover Yellowstone 2009")
+plot(usc2014$map, col=cc, main="LandCover Yellowstone 2014")
+plot(usc2019$map, col=cc, main="LandCover Yellowstone 2019")
+set.seed(42)
 
 #difficile scegliere numero di classi.
 # a prescindere che siano 3 o 4 comunque non sembra esserci coerenza con la scala dei colori
 
-#COSE DA FARE
-# 1- capire numero di classi ottimale
 
 
 #CALCOLARE FREQ CLASSI
-plot(usc1987)
-
+plot(usc1987$map, col=cc)
 freq(usc1987$map)
+
+#   value   count
+# [1,]     1  661053 -> nuvole
+# [2,]     2 5788199 -> foresta matura
+# [3,]     3  822107 -> acqua
+# [4,]     4 3447717 -> foresta estiva
+
+
+plot(usc1989$map, col=cc)
 freq(usc1989$map)
+
+#  value   count
+# [1,]     1 3306887
+# [2,]     2 4677596
+# [3,]     3  620792
+# [4,]     4 2113801
+
+
+plot(usc1994)
 freq(usc1994$map)
+
+plot(usc1999)
 freq(usc1999$map)
+
+plot(usc2004)
 freq(usc2004$map)
+
+plot(usc2009)
 freq(usc2009$map)
+
+plot(usc2014)
 freq(usc2014$map)
-oo<-str(freq(usc2019$map))
-plot(oo)
+
+plot(usc2019)
+freq(usc2019$map)
+
 
 
 
@@ -255,6 +292,8 @@ rlist
 import<-lapply(rlist,raster)
 import
 
+importcl<-lapply(import, unsuperClass, nClasses=3)
+plot(importcl)
 TGr<-stack(import)
 TGr
 
