@@ -146,68 +146,68 @@ c5<-colorRampPalette(c("grey","purple","green")) (100)
 c6<-colorRampPalette(c("green","purple","grey")) (100)
 
 par(mfrow=c(2,4))
-#plot(usc1987$map, col=c1)
-#plot(usc1987$map, col=c2)
+plot(usc1987$map, col=c1)
+plot(usc1987$map, col=c2)
 plot(usc1987$map, col=c3)
-#plot(usc1987$map, col=c4)
-#plot(usc1987$map, col=c5)
-#plot(usc1987$map, col=c6)
+plot(usc1987$map, col=c4)
+plot(usc1987$map, col=c5)
+plot(usc1987$map, col=c6)
 
-#par(mfrow=c(2,4))
-#plot(usc1989$map, col=c1)
-#plot(usc1989$map, col=c2)
-#plot(usc1989$map, col=c3)
-#plot(usc1989$map, col=c4)
+par(mfrow=c(2,4))
+plot(usc1989$map, col=c1)
+plot(usc1989$map, col=c2)
+plot(usc1989$map, col=c3)
+plot(usc1989$map, col=c4)
 plot(usc1989$map, col=c5)
-#plot(usc1989$map, col=c6)
+plot(usc1989$map, col=c6)
 
-#par(mfrow=c(2,4))
-#plot(usc1994$map, col=c1)
-#plot(usc1994$map, col=c2)
-#plot(usc1994$map, col=c3)
+par(mfrow=c(2,4))
+plot(usc1994$map, col=c1)
+plot(usc1994$map, col=c2)
+plot(usc1994$map, col=c3)
 plot(usc1994$map, col=c4)
-#plot(usc1994$map, col=c5)
-#plot(usc1994$map, col=c6)
+plot(usc1994$map, col=c5)
+plot(usc1994$map, col=c6)
 
-#par(mfrow=c(2,4))
-#plot(usc1999$map, col=c1)
+par(mfrow=c(2,4))
+plot(usc1999$map, col=c1)
 plot(usc1999$map, col=c2)
-#plot(usc1999$map, col=c3)
-#plot(usc1999$map, col=c4)
-#plot(usc1999$map, col=c5)
-#plot(usc1999$map, col=c6)
+plot(usc1999$map, col=c3)
+plot(usc1999$map, col=c4)
+plot(usc1999$map, col=c5)
+plot(usc1999$map, col=c6)
 
-#par(mfrow=c(2,4))
-#plot(usc2004$map, col=c1)
-#plot(usc2004$map, col=c2)
-#plot(usc2004$map, col=c3)
-#plot(usc2004$map, col=c4)
-#plot(usc2004$map, col=c5)
+par(mfrow=c(2,4))
+plot(usc2004$map, col=c1)
+plot(usc2004$map, col=c2)
+plot(usc2004$map, col=c3)
+plot(usc2004$map, col=c4)
+plot(usc2004$map, col=c5)
 plot(usc2004$map, col=c6)
 
-#par(mfrow=c(2,4))
-#plot(usc2009$map, col=c1)
-#plot(usc2009$map, col=c2)
-#plot(usc2009$map, col=c3)
-#plot(usc2009$map, col=c4)
-#plot(usc2009$map, col=c5)
+par(mfrow=c(2,4))
+plot(usc2009$map, col=c1)
+plot(usc2009$map, col=c2)
+plot(usc2009$map, col=c3)
+plot(usc2009$map, col=c4)
+plot(usc2009$map, col=c5)
 plot(usc2009$map, col=c6)
 
-#par(mfrow=c(2,4))
-#plot(usc2014$map, col=c1)
-#plot(usc2014$map, col=c2)
+par(mfrow=c(2,4))
+plot(usc2014$map, col=c1)
+plot(usc2014$map, col=c2)
 plot(usc2014$map, col=c3)
-#plot(usc2014$map, col=c4)
-#plot(usc2014$map, col=c5)
-#plot(usc2014$map, col=c6)
+plot(usc2014$map, col=c4)
+plot(usc2014$map, col=c5)
+plot(usc2014$map, col=c6)
 
-#par(mfrow=c(2,4))
-#plot(usc2019$map, col=c1)
-#plot(usc2019$map, col=c2)
+par(mfrow=c(2,4))
+plot(usc2019$map, col=c1)
+plot(usc2019$map, col=c2)
 plot(usc2019$map, col=c3)
-#plot(usc2019$map, col=c4)
-#plot(usc2019$map, col=c5)
-#plot(usc2019$map, col=c6)
+plot(usc2019$map, col=c4)
+plot(usc2019$map, col=c5)
+plot(usc2019$map, col=c6)
 
 ########
 usc1987 <- unsuperClass(y1987, nClasses=4)
@@ -241,41 +241,80 @@ set.seed(42)
 plot(usc1987$map, col=cc)
 freq(usc1987$map)
 
-#   value   count
-# [1,]     1  661053 -> nuvole
-# [2,]     2 5788199 -> foresta matura
-# [3,]     3  822107 -> acqua
-# [4,]     4 3447717 -> foresta estiva
-
+#value   count
+#[1,]     1  871983 -> acqua/ombra nuvole
+#[2,]     2 3396397 -> foresta estiva
+#[3,]     3 5796984 -> foresta matura
+#[4,]     4  653712 -> nuvole
 
 plot(usc1989$map, col=cc)
 freq(usc1989$map)
 
 #  value   count
-# [1,]     1 3306887
-# [2,]     2 4677596
-# [3,]     3  620792
-# [4,]     4 2113801
+# [1,]     1 3306887 -> foresta estiva
+# [2,]     2 4677596 -> acqua
+# [3,]     3  620792 -> aree incendiate
+# [4,]     4 2113801 -> foresta matura
 
 
-plot(usc1994)
+plot(usc1994$map, col=cc)
 freq(usc1994$map)
 
-plot(usc1999)
+#  value   count
+# [1,]     1  800891 -> acqua
+# [2,]     2 3863980 -> foresta matura
+# [3,]     3 3651079 -> aree incendiate
+# [4,]     4 2403126 -> foresta estiva
+
+plot(usc1999$map, col=cc)
 freq(usc1999$map)
 
-plot(usc2004)
+#  value   count
+# [1,]     1  698685 -> acqua
+# [2,]     2 3114160 -> foresta estiva
+# [3,]     3 3527388 -> aree incendiate
+# [4,]     4 3378843 -> foresta matura
+
+
+plot(usc2004$map, col=cc)
 freq(usc2004$map)
 
-plot(usc2009)
+#  value   count
+# [1,]     1 2877005 -> foresta estiva
+# [2,]     2  763734 -> acqua
+# [3,]     3 3575706 -> foresta matura
+# [4,]     4 3502631 -> aree incendiate
+
+
+plot(usc2009$map, col=cc)
 freq(usc2009$map)
 
-plot(usc2014)
+#  value   count
+# [1,]     1 4053139 -> aree incendiate
+# [2,]     2  392414 -> nuvole
+# [3,]     3 5352332 -> foresta 
+# [4,]     4  921191 -> acqua/ ombra nuvole
+
+
+plot(usc2014$map, col=cc)
 freq(usc2014$map)
 
-plot(usc2019)
+#  value   count
+# [1,]     1 4220824 -> foresta matura
+# [2,]     2 2540110 -> aree incendiate
+# [3,]     3 1180992 -> acqua
+# [4,]     4 2777150 -> foresta estiva
+
+
+
+plot(usc2019$map, col=cc)
 freq(usc2019$map)
 
+#  value   count
+# [1,]     1  817613 -> acqua/ombra nuvole
+# [2,]     2  523365 -> nuvole
+# [3,]     3 5353013 -> foresta
+# [4,]     4 4025085 -> aree incendiate
 
 
 
