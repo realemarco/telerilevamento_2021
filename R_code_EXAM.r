@@ -57,7 +57,7 @@ p1<-ggRGB(y1987, r=1, g=2, b=3, stretch="hist")
 p2<-ggRGB(y1989, r=1, g=2, b=3, stretch="hist")
 p3<-ggRGB(y1994, r=1, g=2, b=3, stretch="hist")
 p4<-ggRGB(y1999, r=1, g=2, b=3, stretch="hist")
-p5<-ggRGB(y2004, r=1, g=2, b=3, stretch="hist")
+p5<-ggRGB(y2004, r=1, g=2, b=3, stretch="hist")    #SEMBRA NON FUNZIONA 
 p6<-ggRGB(y2009, r=1, g=2, b=3, stretch="hist")
 p7<-ggRGB(y2014, r=1, g=2, b=3, stretch="hist")
 p8<-ggRGB(y2019, r=1, g=2, b=3, stretch="hist")
@@ -127,15 +127,15 @@ usc2009 <- unsuperClass(y2009, nClasses=3)
 usc2014 <- unsuperClass(y2014, nClasses=3)
 usc2019 <- unsuperClass(y2019, nClasses=3)
 set.seed(42)
-#########PROVA unsuperClass CON BANDA VERDE#######
- usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.1, nClasses=4)
- usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.1, nClasses=4)
- usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.1, nClasses=4)
- usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.1, nClasses=4)     
- usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.1, nClasses=4)     ##FORSE BANDA VERDE EVIDENZIA INCENDIO
- usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.1, nClasses=4)
- usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.1, nClasses=4)
- usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.1, nClasses=4)
+#########PROVA unsuperClass CON BANDA NIR#######
+ usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.2, nClasses=4)
+ usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.2, nClasses=4)
+ usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.2, nClasses=4)
+ usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.2, nClasses=4)     
+ usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.2, nClasses=4)     ##FORSE BANDA VERDE EVIDENZIA INCENDIO
+ usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.2, nClasses=4)
+ usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.2, nClasses=4)
+ usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.2, nClasses=4)
 ##################
 
 c1<-colorRampPalette(c("green","grey","purple")) (100)
@@ -316,9 +316,19 @@ freq(usc2019$map)
 # [3,]     3 5353013 -> foresta
 # [4,]     4 4025085 -> aree incendiate
 
+areatot <- 817613 + 523365 + 5353013 + 4025085
+
+p1987 <- freq(usc1987$map/areatot)
+p1987
+p1989 <- freq(usc1989$map/areatot)
+p1994
+p1999
+p2004
+p2009
+p2014
+p2019
 
 
-#TIME SERIES
 
 #####SEZIONE PROVA######
 setwd("C:/lab/esame/")
@@ -376,3 +386,43 @@ lista
 plot(lista$map) ####HA FUSO TUTTE LE IMMAGINI IN UN'UNICA IMMAGINE
 levelplot(lista$map, col.regions=c1) #LO STESSO QUI, COME PLOTTARLE SEPARATAMENTE MA CON CLASSI COERENTI?
 
+#############################
+
+
+
+
+
+
+click(y1989, id=T, xy=T, cell=T, type="p", pch=16, cex=4, col="yellow")
+
+#      x     y     cell       Yellowstone_19890802_lrg.1     Yellowstone_19890802_lrg.2      Yellowstone_19890802_lrg.3
+# 1 1895.5 563.5   8874436                        103                         28                    49                     
+# 2 1349.5 2502.5  2525604                        176                         88                   78                   
+# 3 2055.5 2413.5  2817696                        131                          53                   53                   
+
+# Definire le colonne del dataset
+bande <- c(1,2,3)
+area_incendiata01 <- c(103,28,49)
+area_incendiata02 <- c(176,88,78)
+area_incendiata03 <- c(131,53,53)    
+
+# Funzione data.frame: crea un dataframe (tabella)
+spectrals <- data.frame(bande, area_incendiata01, area_incendiata02, area_incendiata03)
+# Funzione per avere le info sul file
+spectrals
+
+# bande area_incendiata01 area_incendiata02 area_incendiata03
+# 1     1               103               176               131
+# 2     2                28                88                53
+# 3     3                49                78                53
+
+
+# Plot delle firme spettrali
+# Funzione ggplot: determina l'estetica del grafico
+# Funzione geom_line: connette le osservazioni a seconda del dato che è sulla X/Y
+# Funzione labs: modifica le etichette degli assi, le legende e il plottaggio
+ggplot(spectrals, aes(x=bande)) +
+  geom_line(aes(y=area_incendiata01), color="red") +
+  geom_line(aes(y=area_incendiata02), color="blue") +
+  geom_line(aes(y=area_incendiata03), color="green") +
+  labs(x="bande",y="reflectance")
