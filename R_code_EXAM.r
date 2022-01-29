@@ -204,8 +204,10 @@ library(gridExtra)
 #plot(usc2019$map, col=c6)
 
 ##################### 
-cc<-colorRampPalette(c("green","grey","orange","blue")) (100)
+cc<-colorRampPalette(c("green","orange","blue")) (100)
+ 
 
+                                                              
 par(mfrow=c(2,4))
 plot(usc1987$map, col=cc, main="LandCover Yellowstone 1987")
 plot(usc1989$map, col=cc, main="LandCover Yellowstone 1989")
@@ -216,8 +218,9 @@ plot(usc2009$map, col=cc, main="LandCover Yellowstone 2009")
 plot(usc2014$map, col=cc, main="LandCover Yellowstone 2014")
 plot(usc2019$map, col=cc, main="LandCover Yellowstone 2019")
 
-#difficile scegliere numero di classi.
-# a prescindere che siano 3 o 4 comunque non sembra esserci coerenza con la scala dei colori
+#nessuna coerenza con la scala di riflettanza nel plot simultaneo delle immagini
+#DA ORA acqua a aree incendiate hanno stessa riflettanza nel NIR....
+
 
 
 
