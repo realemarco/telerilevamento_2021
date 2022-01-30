@@ -371,6 +371,23 @@ p2019
 
 
 #fare un grafico land cover 
+library(gridExtra)
+
+anno <- c("1987", "1989","1994","1999", "2004", "2009", "2014", "2019")
+area_incendiata <- c(0, 20, 35, 34, 33, 37, 23, 38)
+vegetazione <- c(86, 74, 58, 60, 60, 51, 64, 50)
+percentages<-data.frame(anno, area_incendiata, vegetazione)
+percentages
+
+#Grafico a barre
+ggplot(percentages, aes(x = anno, y =area_incendiata, fill = area_incendiata)) + geom_bar(stat = "identity") + theme_minimal() + ggtitle("area interessata ad incendi dal 1987 al 2019")
+
+ggplot(percentages, aes(x = anno, y =vegetazione, fill = vegetazione)) + geom_bar(stat = "identity") + theme_minimal() + ggtitle("copertura vegetazione dal 1987 al 2019")
+
+#Grafico lineare area incendiata x vegetazione
+gr_inc <- ggplot(percentages, aes(x=anno, y=area_incendiata, group = 1)) + geom_line(color = "red")
+gr_veg <- ggplot(percentages, aes(x=anno, y=vegetazione, group = 1)) + geom_line(color = "green")
+grid.arrange(gr_inc, gr_veg, nrow = 2)
 
 #####SEZIONE PROVA######
 setwd("C:/lab/esame/")
