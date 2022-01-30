@@ -22,7 +22,8 @@ y2009
 y2014
 y2019
 
-par(mfrow=c(2,4))
+#PLOT RGB LINEAR STRETCH
+par(mfrow=c(2,4), mar=c(2.5,2.5,2.5,2.5)) 
 plotRGB(y1987, r=1, g=2, b=3, stretch="lin")
 plotRGB(y1989, r=1, g=2, b=3, stretch="lin")
 plotRGB(y1994, r=1, g=2, b=3, stretch="lin")
@@ -33,32 +34,30 @@ plotRGB(y2014, r=1, g=2, b=3, stretch="lin")
 plotRGB(y2019, r=1, g=2, b=3, stretch="lin")
 
 #PLOT RGB IN HISTOGRAM STRETCH#
-# par(mfrow=c(2,4))
-# plotRGB(y1987, r=1, g=2, b=3, stretch="hist")
-# plotRGB(y1989, r=1, g=2, b=3, stretch="hist")
-# plotRGB(y1994, r=1, g=2, b=3, stretch="hist")
-# plotRGB(y1999, r=1, g=2, b=3, stretch="hist")
-# plotRGB(y2004, r=1, g=2, b=3, stretch="hist")
-# plotRGB(y2009, r=1, g=2, b=3, stretch="hist")
-# plotRGB(y2014, r=1, g=2, b=3, stretch="hist")
-# plotRGB(y2019, r=1, g=2, b=3, stretch="hist")
+par(mfrow=c(2,4), mar=c(2.5,2.5,2.5,2.5)) 
+plotRGB(y1987, r=1, g=2, b=3, stretch="hist")
+plotRGB(y1989, r=1, g=2, b=3, stretch="hist")
+plotRGB(y1994, r=1, g=2, b=3, stretch="hist")
+plotRGB(y1999, r=1, g=2, b=3, stretch="hist")
+plotRGB(y2004, r=1, g=2, b=3, stretch="hist")
+plotRGB(y2009, r=1, g=2, b=3, stretch="hist")
+plotRGB(y2014, r=1, g=2, b=3, stretch="hist")
+plotRGB(y2019, r=1, g=2, b=3, stretch="hist")
 
 
 
 #PROVA GGPLOT##
-library(gridExtra)
-p1<-ggRGB(y1987, r=1, g=2, b=3, stretch="hist")
-p2<-ggRGB(y1989, r=1, g=2, b=3, stretch="hist")
-p3<-ggRGB(y1994, r=1, g=2, b=3, stretch="hist")
-p4<-ggRGB(y1999, r=1, g=2, b=3, stretch="hist")
-p5<-ggRGB(y2004, r=1, g=2, b=3, stretch="hist")    #SEMBRA NON FUNZIONARE
-p6<-ggRGB(y2009, r=1, g=2, b=3, stretch="hist")
-p7<-ggRGB(y2014, r=1, g=2, b=3, stretch="hist")
-p8<-ggRGB(y2019, r=1, g=2, b=3, stretch="hist")
-grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, nrow=2)
-
-#####PROVA2 plottare solo una banda#####
-plot(y2019$Yellowstone_oli_2019193_lrg.1) #funziona
+#library(gridExtra)
+#p1<-ggRGB(y1987, r=1, g=2, b=3, stretch="hist")
+#p2<-ggRGB(y1989, r=1, g=2, b=3, stretch="hist")
+#p3<-ggRGB(y1994, r=1, g=2, b=3, stretch="hist")
+#p4<-ggRGB(y1999, r=1, g=2, b=3, stretch="hist")
+#p5<-ggRGB(y2004, r=1, g=2, b=3, stretch="hist")    #SEMBRA NON FUNZIONARE
+#p6<-ggRGB(y2009, r=1, g=2, b=3, stretch="hist")
+#p7<-ggRGB(y2014, r=1, g=2, b=3, stretch="hist")
+#p8<-ggRGB(y2019, r=1, g=2, b=3, stretch="hist")
+#grid.arrange(p1, p2, p3, p4, p5, p6, p7, p8, nrow=2)
+##############################################################
 
 #plot solo prima banda (verde?)
 par(mfrow=c(2,4))
@@ -96,40 +95,30 @@ plot(y2019$Yellowstone_oli_2019193_lrg.3)
 
 #funziona tutto, decidere quale banda usare per  analisi sulle zone incendiate
 
-#####PROVA############# (non funziona)
-library(gridExtra)
+
 #########################
 
 #UNSUPERCLASS
 
-######TEST CLASSI###########
-#   usc19891 <- unsuperClass(y1989, nClasses=3)
-#   usc19892 <- unsuperClass(y1989, nClasses=4) #forse meglio 4 classi
-#   usc19893 <- unsuperClass(y1989, nClasses=5)
-#   par(mfrow=c(2,4))
-#   plot(usc19891$map)
-#   plot(usc19892$map) 
-#   plot(usc19893$map) 
-#########################################
 ##   UNSUPERCLASS TUTTE LE BANDE #
-#usc1987 <- unsuperClass(y1987, nClasses=3)
-#usc1989 <- unsuperClass(y1989, nClasses=3)
-#usc1994 <- unsuperClass(y1994, nClasses=3)
-#usc1999 <- unsuperClass(y1999, nClasses=3)
-#usc2004 <- unsuperClass(y2004, nClasses=3)
-#usc2009 <- unsuperClass(y2009, nClasses=3)
-#usc2014 <- unsuperClass(y2014, nClasses=3)
-#usc2019 <- unsuperClass(y2019, nClasses=3)
+usc1987 <- unsuperClass(y1987, nClasses=4)
+usc1989 <- unsuperClass(y1989, nClasses=4)
+usc1994 <- unsuperClass(y1994, nClasses=4)
+usc1999 <- unsuperClass(y1999, nClasses=4)
+usc2004 <- unsuperClass(y2004, nClasses=4)
+usc2009 <- unsuperClass(y2009, nClasses=4)
+usc2014 <- unsuperClass(y2014, nClasses=4)
+usc2019 <- unsuperClass(y2019, nClasses=4)
 
-#########PROVA unsuperClass CON BANDA NIR#######
- usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.2, nClasses=4)
- usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.2, nClasses=4)
- usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.2, nClasses=4)
- usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.2, nClasses=4)     
- usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.2, nClasses=4)     ##FORSE BANDA VERDE EVIDENZIA INCENDIO
- usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.2, nClasses=4)
- usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.2, nClasses=4)
- usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.2, nClasses=4)
+#########PROVA unsuperClass CON BANDA VERDE#######
+ #usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.1, nClasses=4)
+ #usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.1, nClasses=4)
+ #usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.1, nClasses=4)
+ #usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.1, nClasses=4)     
+ #usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.1, nClasses=4)     ##FORSE BANDA VERDE EVIDENZIA INCENDIO
+ #usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.1, nClasses=4)
+ #usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.1, nClasses=4)
+ #usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.1, nClasses=4)
 ##################
 #
 #c1<-colorRampPalette(c("green","grey","purple")) (100)
@@ -207,8 +196,7 @@ library(gridExtra)
 cc<-colorRampPalette(c("green","orange","blue")) (100)
  
 
-                                                              
-par(mfrow=c(2,4))
+par(mfrow=c(2,4), mar=c(2.5,2.5,2.5,2.5))                                                              
 plot(usc1987$map, col=cc, main="LandCover Yellowstone 1987")
 plot(usc1989$map, col=cc, main="LandCover Yellowstone 1989")
 plot(usc1994$map, col=cc, main="LandCover Yellowstone 1994")
@@ -231,69 +219,68 @@ plot(usc2019$map, col=cc, main="LandCover Yellowstone 2019")
 plot(usc1987$map, col=cc)
 freq(usc1987$map)
 
-#value   count
-#[1,]     1  734844 -> acqua/ombra nuvole
-#[2,]     2 1277992 -> nuvole
-#[3,]     3 3111992 -> foresta estiva
-#[4,]     4 5594248 -> foresta matura
+#  value   count
+#[1,]     1  659620 -> nuvole
+#[2,]     2  824527 -> acqua/ombra nuvole
+#[3,]     3 3403593 -> altra vegetazione
+#[4,]     4 5831336 -> foresta matura
 
 plot(usc1989$map, col=cc)
 freq(usc1989$map)
 
-#value   count  ############### DA QUI IN POI ACQUA E ZONA INCENDATA COINCIDONO
-#[1,]     1 1493457
-#[2,]     2 3833092
-#[3,]     3 2210853
-#[4,]     4 3181674
+#  value   count
+#[1,]     1 4626048 -> foresta matura
+#[2,]     2  604650 -> acqua
+#[3,]     3 2144591 -> area bruciata
+#[4,]     4 3343787 -> altra vegetazione
 
 
 plot(usc1994$map, col=cc)
 freq(usc1994$map)
 
 #  value   count
-# [1,]     1  800891 -> acqua
-# [2,]     2 3863980 -> foresta matura
-# [3,]     3 3651079 -> aree incendiate
-# [4,]     4 2403126 -> foresta estiva
+#[1,]     1  799405 -> acqua
+#[2,]     2 3770220 -> foresta matura
+#[3,]     3 3720497 -> area bruciata
+#[4,]     4 2428954 -> altra vegetazione
 
 plot(usc1999$map, col=cc)
 freq(usc1999$map)
 
 #  value   count
-# [1,]     1  698685 -> acqua
-# [2,]     2 3114160 -> foresta estiva
-# [3,]     3 3527388 -> aree incendiate
-# [4,]     4 3378843 -> foresta matura
-
+#[1,]     1 3362417 -> foresta matura
+#[2,]     2 3062801 -> altra vegetazione
+#[3,]     3  700552 -> acqua
+#[4,]     4 3593306 -> area incendiata
 
 plot(usc2004$map, col=cc)
 freq(usc2004$map)
 
 #  value   count
-# [1,]     1 2877005 -> foresta estiva
-# [2,]     2  763734 -> acqua
-# [3,]     3 3575706 -> foresta matura
-# [4,]     4 3502631 -> aree incendiate
+#[1,]     1 3450743 -> foresta matura
+#[2,]     2 2992403 -> altra vegetazione
+#[3,]     3  760718 -> acqua
+#[4,]     4 3515212 -> area bruciata
 
 
 plot(usc2009$map, col=cc)
 freq(usc2009$map)
 
 #  value   count
-# [1,]     1 4053139 -> aree incendiate
-# [2,]     2  392414 -> nuvole
-# [3,]     3 5352332 -> foresta 
-# [4,]     4  921191 -> acqua/ ombra nuvole
+#[1,]     1  365011 -> nuvole
+#[2,]     2  913583 -> acqua/ombra nuvole
+#[3,]     3 5474748 -> vegetazione tot
+#[4,]     4 3965734 -> area bruciata
 
 
 plot(usc2014$map, col=cc)
 freq(usc2014$map)
 
 #  value   count
-# [1,]     1 4220824 -> foresta matura
-# [2,]     2 2540110 -> aree incendiate
-# [3,]     3 1180992 -> acqua
-# [4,]     4 2777150 -> foresta estiva
+#[1,]     1 2702556 -> altra vegetazione
+#[2,]     2 2487973 -> area bruciata
+#[3,]     3 4270153 -> foresta matura
+#[4,]     4 1258394 -> acqua
 
 
 
@@ -301,81 +288,89 @@ plot(usc2019$map, col=cc)
 freq(usc2019$map)
 
 #  value   count
-# [1,]     1  817613 -> acqua/ombra nuvole
-# [2,]     2  523365 -> nuvole
-# [3,]     3 5353013 -> foresta
-# [4,]     4 4025085 -> aree incendiate
-
+#[1,]     1  820008 -> acqua/ombra nuvole
+#[2,]     2 4041129 -> area bruciata
+#[3,]     3 5318256 -> vegetazione tot
+#[4,]     4  539683 -> nuvole
 
 
 #calcolo percentuali superficie
-#questo ok e calcolato su banda NIR
-areatot <- 817613 + 523365 + 5353013 + 4025085
+
+areatot <- 10719076 #(pixel totali)
 
 
 p1987 <- freq(usc1987$map)/areatot
 p1987
-#            value      count
-#[1,] 9.329162e-08 0.06728294 -> 7%
-#[2,] 1.865832e-07 0.10842660 -> 11%
-#[3,] 2.798749e-07 0.29386815 -> 29%
-#[4,] 3.731665e-07 0.53042231 -> 53%
+# value      count
+#[1,] 9.329162e-08 0.06153702 -> 6% (nuvole)
+#[2,] 1.865832e-07 0.07692146 -> 8% (acqua/ombra nuvole)
+#[3,] 2.798749e-07 0.31752672 -> 32% (altra vegetazione)
+#[4,] 3.731665e-07 0.54401480 -> 54% (foresta matura)
 
 p1989 <- freq(usc1989$map)/areatot
 p1989
-#value     count
-#[1,] 9.329162e-08 0.1246713 -> 13%
-#[2,] 1.865832e-07 0.3112252 -> 31%
-#[3,] 2.798749e-07 0.3523748 -> 35%
-#[4,] 3.731665e-07 0.2117287 -> 21%
+# value      count
+#[1,] 9.329162e-08 0.43157153 -> 43% (foresta matura)
+#[2,] 1.865832e-07 0.05640878 -> 6% (acqua)
+#[3,] 2.798749e-07 0.20007238 -> 20% (area bruciata)
+#[4,] 3.731665e-07 0.31194732 -> 31% (altra vegetazione)
+
 
 p1994 <-freq(usc1994$map)/areatot
 p1994
-#value      count
-#[1,] 9.329162e-08 0.37231959 -> 37%
-#[2,] 1.865832e-07 0.21618804 -> 22%
-#[3,] 2.798749e-07 0.35158366 -> 35%
-#[4,] 3.731665e-07 0.05990871 -> 5%
+# value      count
+#[1,] 9.329162e-08 0.07457779 -> 7% (acqua)
+#[2,] 1.865832e-07 0.35172994 -> 35% (foresta matura)
+#[3,] 2.798749e-07 0.34709120 -> 35% (area bruciata)
+#[4,] 3.731665e-07 0.22660106 -> 23% (altra vegetazione)
+
 
 p1999<-freq(usc1999$map)/areatot
 p1999
-#value      count
-#[1,] 9.329162e-08 0.05995442 -> 6%
-#[2,] 1.865832e-07 0.27539165 -> 28%
-#[3,] 2.798749e-07 0.41791606 -> 42%
-#[4,] 3.731665e-07 0.24673787 -> 24%
+# value      count
+#[1,] 9.329162e-08 0.31368534 -> 31% (foresta matura)
+#[2,] 1.865832e-07 0.28573368 -> 29% (altra vegetazione)
+#[3,] 2.798749e-07 0.06535563 -> 6% (acqua)
+#[4,] 3.731665e-07 0.33522535 -> 34% (area incendiata)
+
 
 p2004<-freq(usc2004$map)/areatot
 p2004
-#value      count
-#[1,] 9.329162e-08 0.06393415 -> 6%
-#[2,] 1.865832e-07 0.44960554 -> 45%
-#[3,] 2.798749e-07 0.24562462 -> 25%
-#[4,] 3.731665e-07 0.24083568 -> 24%
+# value      count
+#[1,] 9.329162e-08 0.32192542 -> 32% (foresta matura)
+#[2,] 1.865832e-07 0.27916613 -> 28% (altra vegetazione)
+#[3,] 2.798749e-07 0.07096862 -> 7% (acqua)
+#[4,] 3.731665e-07 0.32793983 -> 33% (area bruciata)
+
 
 p2009<-freq(usc2009$map)/areatot
 p2009
-#value      count
-#[1,] 9.329162e-08 0.11953764 -> 12%
-#[2,] 1.865832e-07 0.48588610 -> 49%
-#[3,] 2.798749e-07 0.07559439 -> 7%
-#[4,] 3.731665e-07 0.31898188 -> 32%
+# value      count
+#[1,] 9.329162e-08 0.03405247 -> 3% (nuvole)
+#[2,] 1.865832e-07 0.08522964 -> 9% (acqua/ombra nuvole)
+#[3,] 2.798749e-07 0.51074813 -> 51% (vegetazione tot)
+#[4,] 3.731665e-07 0.36996976 -> 37% (area bruciata)
+
 
 p2014<-freq(usc2014$map)/areatot
 p2014
-#value      count
-#[1,] 9.329162e-08 0.19040755 -> 19%
-#[2,] 1.865832e-07 0.40417626 -> 40%
-#[3,] 2.798749e-07 0.07651051 -> 8%
-#[4,] 3.731665e-07 0.32890568 -> 33%
+# value     count
+#[1,] 9.329162e-08 0.2521258 -> 25% (altra vegetazione)
+#[2,] 1.865832e-07 0.2321070 -> 23% (area bruciata)
+#[3,] 2.798749e-07 0.3983695 -> 40% (foresta matura)
+#[4,] 3.731665e-07 0.1173976 -> 12% (acqua)
+
 
 p2019<-freq(usc2019$map)/areatot
 p2019
-#value      count
-#[1,] 9.329162e-08 0.09687859 -> 10%
-#[2,] 1.865832e-07 0.07494685 -> 7%
-#[3,] 2.798749e-07 0.46837302 -> 47%
-#[4,] 3.731665e-07 0.35980154 -> 36%
+# value      count
+ #[1,] 9.329162e-08 0.07649988 -> 8% (acqua/ombra nuvole)
+#[2,] 1.865832e-07 0.37700348 -> 38% (area bruciata)
+#[3,] 2.798749e-07 0.49614874 -> 50% (vegetazione tot)
+#[4,] 3.731665e-07 0.05034790 -> 5% (nuvole)
+
+
+#fare un grafico land cover 
 
 #####SEZIONE PROVA######
 setwd("C:/lab/esame/")
