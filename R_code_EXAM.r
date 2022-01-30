@@ -96,89 +96,6 @@ usc2009 <- unsuperClass(y2009, nClasses=4)
 usc2014 <- unsuperClass(y2014, nClasses=4)
 usc2019 <- unsuperClass(y2019, nClasses=4)
 
-#########PROVA unsuperClass CON BANDA VERDE#######
- #usc1987 <- unsuperClass(y1987$Yellowstone_19870805_lrg.1, nClasses=4)
- #usc1989 <- unsuperClass(y1989$Yellowstone_19890802_lrg.1, nClasses=4)
- #usc1994 <- unsuperClass(y1994$Yellowstone_19940925_lrg.1, nClasses=4)
- #usc1999 <- unsuperClass(y1999$Yellowstone_19990923_lrg.1, nClasses=4)     
- #usc2004 <- unsuperClass(y2004$Yellowstone_20041006_lrg.1, nClasses=4)     ##FORSE BANDA VERDE EVIDENZIA INCENDIO
- #usc2009 <- unsuperClass(y2009$Yellowstone_20090902_lrg.1, nClasses=4)
- #usc2014 <- unsuperClass(y2014$Yellowstone_oli_2014291_lrg.1, nClasses=4)
- #usc2019 <- unsuperClass(y2019$Yellowstone_oli_2019193_lrg.1, nClasses=4)
-##################
-#
-#c1<-colorRampPalette(c("green","grey","purple")) (100)
-#c2<-colorRampPalette(c("grey","green","purple")) (100)
-#c3<-colorRampPalette(c("purple","grey","green")) (100)
-#c4<-colorRampPalette(c("purple","green","grey")) (100)
-#c5<-colorRampPalette(c("grey","purple","green")) (100)
-#c6<-colorRampPalette(c("green","purple","grey")) (100)
-
-#par(mfrow=c(2,4))
-#plot(usc1987$map, col=c1)
-#plot(usc1987$map, col=c2)
-#plot(usc1987$map, col=c3)
-#plot(usc1987$map, col=c4)
-#plot(usc1987$map, col=c5)
-#plot(usc1987$map, col=c6)
-
-#par(mfrow=c(2,4))
-#plot(usc1989$map, col=c1)
-#plot(usc1989$map, col=c2)
-#plot(usc1989$map, col=c3)
-#plot(usc1989$map, col=c4)
-#plot(usc1989$map, col=c5)
-#plot(usc1989$map, col=c6)
-
-#par(mfrow=c(2,4))
-#plot(usc1994$map, col=c1)
-#plot(usc1994$map, col=c2)
-#plot(usc1994$map, col=c3)
-#plot(usc1994$map, col=c4)
-#plot(usc1994$map, col=c5)
-#plot(usc1994$map, col=c6)
-
-#par(mfrow=c(2,4))
-#plot(usc1999$map, col=c1)
-#plot(usc1999$map, col=c2)
-#plot(usc1999$map, col=c3)
-#plot(usc1999$map, col=c4)
-#plot(usc1999$map, col=c5)
-#plot(usc1999$map, col=c6)
-
-#par(mfrow=c(2,4))
-#plot(usc2004$map, col=c1)
-#plot(usc2004$map, col=c2)
-#plot(usc2004$map, col=c3)
-#plot(usc2004$map, col=c4)
-#plot(usc2004$map, col=c5)
-#plot(usc2004$map, col=c6)
-
-#par(mfrow=c(2,4))
-#plot(usc2009$map, col=c1)
-#plot(usc2009$map, col=c2)
-#plot(usc2009$map, col=c3)
-#plot(usc2009$map, col=c4)
-#plot(usc2009$map, col=c5)
-#plot(usc2009$map, col=c6)
-
-#par(mfrow=c(2,4))
-#plot(usc2014$map, col=c1)
-#plot(usc2014$map, col=c2)
-#plot(usc2014$map, col=c3)
-#plot(usc2014$map, col=c4)
-#plot(usc2014$map, col=c5)
-#plot(usc2014$map, col=c6)
-
-#par(mfrow=c(2,4))
-#plot(usc2019$map, col=c1)
-#plot(usc2019$map, col=c2)
-#plot(usc2019$map, col=c3)
-#plot(usc2019$map, col=c4)
-#plot(usc2019$map, col=c5)
-#plot(usc2019$map, col=c6)
-
-##################### 
 cc<-colorRampPalette(c("green","orange","blue")) (100)
  
 
@@ -192,11 +109,7 @@ plot(usc2009$map, col=cc, main="LandCover Yellowstone 2009")
 plot(usc2014$map, col=cc, main="LandCover Yellowstone 2014")
 plot(usc2019$map, col=cc, main="LandCover Yellowstone 2019")
 
-#nessuna coerenza con la scala di riflettanza nel plot simultaneo delle immagini
-#DA ORA acqua a aree incendiate hanno stessa riflettanza nel NIR....
-
-
-
+dev.off()
 
 #CALCOLARE FREQ CLASSI
 
@@ -385,3 +298,4 @@ vegxveg
 veg_mat <- ggplot(vegxveg, aes(x=anno0, y=vegetazione_matura, group = 1)) + geom_line(color = "dark green")
 gr_veg <- ggplot(vegxveg, aes(x=anno0, y=altra_vegetazione, group = 1)) + geom_line(color = " light green")
 grid.arrange(veg_mat, gr_veg, nrow = 2)
+
