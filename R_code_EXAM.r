@@ -1,9 +1,10 @@
 setwd("C:/lab/esame/")
 library(raster)
-library(RStoolbox)
-library(ggplot2)
-library(rasterVis)
+library(RStoolbox) #per unsupervised classificatiom
+library(gridExtra) #per creare grafici
+library(ggplot2) #per usare la funzione "ggplot"
 
+#importo le immagini cn la funzione "brick"
 y1987 <- brick("Yellowstone_19870805_lrg.jpg")
 y1989 <- brick("Yellowstone_19890802_lrg.jpg")
 y1994 <- brick("Yellowstone_19940925_lrg.jpg")
@@ -13,6 +14,7 @@ y2009 <- brick("Yellowstone_20090902_lrg.jpg")
 y2014 <- brick("yellowstone_oli_2014291_lrg.jpg")
 y2019 <- brick ("yellowstone_oli_2019193_lrg.jpg")
 
+#visualizzo i file per vederne le caratteristiche
 y1987
 y1989
 y1994
@@ -23,6 +25,7 @@ y2014
 y2019
 
 #PLOT RGB LINEAR STRETCH
+#plot RGB anche se i colori rappresentati non sono quelli "naturali"
 par(mfrow=c(2,4), mar=c(2.5,2.5,2.5,2.5)) 
 plotRGB(y1987, r=1, g=2, b=3, stretch="lin")
 plotRGB(y1989, r=1, g=2, b=3, stretch="lin")
@@ -32,8 +35,11 @@ plotRGB(y2004, r=1, g=2, b=3, stretch="lin")
 plotRGB(y2009, r=1, g=2, b=3, stretch="lin")
 plotRGB(y2014, r=1, g=2, b=3, stretch="lin")
 plotRGB(y2019, r=1, g=2, b=3, stretch="lin")
+mtext("plot RGB con stretch lineare 1987-2019", side = 3, line = -21, outer = TRUE)
+
 
 #PLOT RGB IN HISTOGRAM STRETCH#
+#per marcare maggiormente le differenze tra aree incendiate e non
 par(mfrow=c(2,4), mar=c(2.5,2.5,2.5,2.5)) 
 plotRGB(y1987, r=1, g=2, b=3, stretch="hist")
 plotRGB(y1989, r=1, g=2, b=3, stretch="hist")
@@ -43,10 +49,13 @@ plotRGB(y2004, r=1, g=2, b=3, stretch="hist")
 plotRGB(y2009, r=1, g=2, b=3, stretch="hist")
 plotRGB(y2014, r=1, g=2, b=3, stretch="hist")
 plotRGB(y2019, r=1, g=2, b=3, stretch="hist")
+mtext("plot RGB con stretch istogramma 1987-2019", side = 3, line = -21, outer = TRUE)
 
 
-#plot solo prima banda (GREEN)
-par(mfrow=c(2,4))
+#MULTIPANEL DELLE SINGOLE BANDE
+
+#plot prima banda (GREEN)
+par(mfrow=c(2,4), mar=c(2.5,3,2.5,2.5))
 plot(y1987$Yellowstone_19870805_lrg.1)
 plot(y1989$Yellowstone_19890802_lrg.1)
 plot(y1994$Yellowstone_19940925_lrg.1)
@@ -55,10 +64,11 @@ plot(y2004$Yellowstone_20041006_lrg.1)
 plot(y2009$Yellowstone_20090902_lrg.1)
 plot(y2014$Yellowstone_oli_2014291_lrg.1)
 plot(y2019$Yellowstone_oli_2019193_lrg.1)
+mtext("multipanel banda GREEN 1987-2019", side = 3, line = -22, outer = TRUE)
 
 
-#plot solo seconda banda (NIR)
-par(mfrow=c(2,4))
+#plot seconda banda (NIR)
+par(mfrow=c(2,4), mar=c(2.5,3,2.5,2.5))
 plot(y1987$Yellowstone_19870805_lrg.2)
 plot(y1989$Yellowstone_19890802_lrg.2)
 plot(y1994$Yellowstone_19940925_lrg.2)
@@ -67,9 +77,10 @@ plot(y2004$Yellowstone_20041006_lrg.2)
 plot(y2009$Yellowstone_20090902_lrg.2)
 plot(y2014$Yellowstone_oli_2014291_lrg.2)
 plot(y2019$Yellowstone_oli_2019193_lrg.2)
+mtext("multipanel banda NIR 1987-2019", side = 3, line = -22, outer = TRUE)
 
-#plot solo terza banda (SWIR)
-par(mfrow=c(2,4))
+#plot terza banda (SWIR)
+par(mfrow=c(2,4), mar=c(2.5,3,2.5,2.5))
 plot(y1987$Yellowstone_19870805_lrg.3)
 plot(y1989$Yellowstone_19890802_lrg.3)
 plot(y1994$Yellowstone_19940925_lrg.3)
@@ -78,13 +89,12 @@ plot(y2004$Yellowstone_20041006_lrg.3)
 plot(y2009$Yellowstone_20090902_lrg.3)
 plot(y2014$Yellowstone_oli_2014291_lrg.3)
 plot(y2019$Yellowstone_oli_2019193_lrg.3)
+mtext("multipanel banda SWIR 1987-2019", side = 3, line = -22, outer = TRUE)
 
-#funziona tutto, decidere quale banda usare per  analisi sulle zone incendiate
 
+#........................................................
 
-#########################
-
-#UNSUPERCLASS
+#UNSUPERVISED CLASSIFICATION
 
 ##   UNSUPERCLASS TUTTE LE BANDE #
 usc1987 <- unsuperClass(y1987, nClasses=4)
@@ -109,13 +119,14 @@ plot(usc2009$map, col=cc, main="LandCover Yellowstone 2009")
 plot(usc2014$map, col=cc, main="LandCover Yellowstone 2014")
 plot(usc2019$map, col=cc, main="LandCover Yellowstone 2019")
 
-dev.off()
+#..............................................................
 
-#CALCOLARE FREQ CLASSI
+#CALCOLO FREQUENZA CLASSI
+# e successiva assegnazione delle 4 classi
 
-# RIFARE CALCOLO FREQUENZE su bnda NIR (sotto sono calcolate su tutte le bande)
+# (la presenza di nuvole non permette di discernere le due classi di vegetazione)
 
-plot(usc1987$map, col=cc)
+plot(usc1987$map, col=cc, main="LandCover Yellowstone 1987")
 freq(usc1987$map)
 
 #  value   count
@@ -124,7 +135,7 @@ freq(usc1987$map)
 #[3,]     3 3403593 -> altra vegetazione
 #[4,]     4 5831336 -> foresta matura
 
-plot(usc1989$map, col=cc)
+plot(usc1989$map, col=cc, main="LandCover Yellowstone 1989")
 freq(usc1989$map)
 
 #  value   count
@@ -134,7 +145,7 @@ freq(usc1989$map)
 #[4,]     4 3343787 -> altra vegetazione
 
 
-plot(usc1994$map, col=cc)
+plot(usc1994$map, col=cc,main="LandCover Yellowstone 1994")
 freq(usc1994$map)
 
 #  value   count
@@ -143,7 +154,7 @@ freq(usc1994$map)
 #[3,]     3 3720497 -> area bruciata
 #[4,]     4 2428954 -> altra vegetazione
 
-plot(usc1999$map, col=cc)
+plot(usc1999$map, col=cc, main="LandCover Yellowstone 1999")
 freq(usc1999$map)
 
 #  value   count
@@ -152,7 +163,7 @@ freq(usc1999$map)
 #[3,]     3  700552 -> acqua
 #[4,]     4 3593306 -> area incendiata
 
-plot(usc2004$map, col=cc)
+plot(usc2004$map, col=cc, main="LandCover Yellowstone 2004")
 freq(usc2004$map)
 
 #  value   count
@@ -162,7 +173,7 @@ freq(usc2004$map)
 #[4,]     4 3515212 -> area bruciata
 
 
-plot(usc2009$map, col=cc)
+plot(usc2009$map, col=cc, main="LandCover Yellowstone 2009")
 freq(usc2009$map)
 
 #  value   count
@@ -172,7 +183,7 @@ freq(usc2009$map)
 #[4,]     4 3965734 -> area bruciata
 
 
-plot(usc2014$map, col=cc)
+plot(usc2014$map, col=cc, main="LandCover Yellowstone 2014")
 freq(usc2014$map)
 
 #  value   count
@@ -183,7 +194,7 @@ freq(usc2014$map)
 
 
 
-plot(usc2019$map, col=cc)
+plot(usc2019$map, col=cc, main="LandCover Yellowstone 2019")
 freq(usc2019$map)
 
 #  value   count
@@ -193,10 +204,11 @@ freq(usc2019$map)
 #[4,]     4  539683 -> nuvole
 
 
-#calcolo percentuali superficie
+# CALCOLO LAND COVER
 
 areatot <- 10719076 #(pixel totali)
 
+#Calcolo ottenuto mettendo a rapporto i pixel di ciascuna classe con i pixel totali
 
 p1987 <- freq(usc1987$map)/areatot
 p1987
@@ -269,8 +281,7 @@ p2019
 #[4,] 3.731665e-07 0.05034790 -> 5% (nuvole)
 
 
-#fare un grafico land cover 
-library(gridExtra)
+#VISUALIZZAZIONE DATI ATTRAVERSO GRAFICI
 
 anno <- c("1987", "1989","1994","1999", "2004", "2009", "2014", "2019")
 area_incendiata <- c(0, 20, 35, 34, 33, 37, 23, 38)
@@ -279,14 +290,14 @@ percentages<-data.frame(anno, area_incendiata, vegetazione)
 percentages
 
 #Grafico a barre
-ggplot(percentages, aes(x = anno, y =area_incendiata, fill = area_incendiata)) + geom_bar(stat = "identity") + theme_minimal() + ggtitle("area interessata ad incendi dal 1987 al 2019")
+ggplot(percentages, aes(x = anno, y =area_incendiata, fill = area_incendiata)) + geom_bar(stat = "identity") + theme_minimal() + ggtitle("Area interessata da incendi dal 1987 al 2019")
 
-ggplot(percentages, aes(x = anno, y =vegetazione, fill = vegetazione)) + geom_bar(stat = "identity") + theme_minimal() + ggtitle("copertura vegetazione dal 1987 al 2019")
+ggplot(percentages, aes(x = anno, y =vegetazione, fill = vegetazione)) + geom_bar(stat = "identity") + theme_minimal() + ggtitle("Copertura vegetazione tot. dal 1987 al 2019")
 
 #Grafico lineare area incendiata x vegetazione
 gr_inc <- ggplot(percentages, aes(x=anno, y=area_incendiata, group = 1)) + geom_line(color = "red")
 gr_veg <- ggplot(percentages, aes(x=anno, y=vegetazione, group = 1)) + geom_line(color = "green")
-grid.arrange(gr_inc, gr_veg, nrow = 2)
+grid.arrange(gr_inc, gr_veg, nrow = 2, top= "Comparazione copertura vegetazione e aree incendiate")
 
 #grafico lineare vegetazione matura x altra vegetazione
 anno0 <- c("1987", "1989","1994","1999", "2004", "2014")
@@ -297,5 +308,5 @@ vegxveg
 
 veg_mat <- ggplot(vegxveg, aes(x=anno0, y=vegetazione_matura, group = 1)) + geom_line(color = "dark green")
 gr_veg <- ggplot(vegxveg, aes(x=anno0, y=altra_vegetazione, group = 1)) + geom_line(color = " light green")
-grid.arrange(veg_mat, gr_veg, nrow = 2)
+grid.arrange(veg_mat, gr_veg, nrow = 2, top= "Comparazione copertura vegetazioni")
 
