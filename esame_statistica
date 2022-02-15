@@ -1,17 +1,129 @@
 
 #necessario installare il pacchetto "vegan"
-install.packages("vegan")
+
+
+# install.packages("vegan")
 library(vegan)
+#
+# setwd("C:/esamestat") #sembra non servire #rivedere percorso setwd in ogni caso
+#
 
 ?mite #così vedo info sul dataset 
 
+###################
 #Oribatid mite data. 70 soil cores collected by Daniel Borcard in 1989. 
 #See Borcard et al. (1992, 1994) for details.
 
 #There are three linked data sets: 
- # mite that contains the data on 35 species of Oribatid mites, 
- # mite.env that contains environmental data in the same sampling sites, 
- # mite.xy that contains geographic coordinates, and mite.pcnm that contains 22 PCNM base functions (columns) computed from the geographic coordinates of the 70 sampling sites (Borcard & Legendre 2002). 
+# mite that contains the data on 35 species of Oribatid mites, 
+# mite.env that contains environmental data in the same sampling sites, 
+# mite.xy that contains geographic coordinates, and mite.pcnm that contains 22 PCNM base functions (columns) computed from the geographic coordinates of the 70 sampling sites (Borcard & Legendre 2002). 
 
 #The whole sampling area was 2.5 m x 10 m in size.
 
+#ELEMENTI DATASET:
+# SubsDens-> Substrate density (g/L)
+# WatrCont -> Water content of the substrate (g/L)
+# Substrate -> Substrate type, factor with levels Sphagn1, Sphagn2 Sphagn3 Sphagn Litter Barepeat Interface
+# Shrub -> Shrub density, an ordered factor with levels 1 < 2 < 3
+# Topo -> Microtopography, a factor with levels Blanket and Hummock
+###################
+
+#2...........................................
+
+mite_env <- read.table("esamestat/data/mite_env.txt", header = TRUE)
+#header=TRUE perchè altrimenti i nomi delle variabili vengono considerati come elementi del dataset
+
+mite_env
+
+
+mite_csv <- read.csv("esamestat/data/mite.csv")
+mite_csv
+#..................................
+
+#   Quante specie?
+
+#in mite_csv le specie sono rappresentate in colonna, riferite alla presenza per sito
+#quindi dal numero di colonne mi ricavo il numero di specie
+ncol(mite_csv)
+# [1] 35
+
+
+#   Quante osservazioni (carotaggi effettuati)?
+
+#considero le righe, che rappresentano i carotaggi effettuati per sito
+nrow(mite_csv)
+#[1] 70
+
+
+# Quante variabili ambientali?
+
+#da considerare è il numero di colonne di mite_env
+ncol(mite_env)
+
+#[1] 5
+
+
+
+#Controlliamo che il dataset sia organizzato come nelle info originali
+
+#Subdens
+class(mite_env$SubsDens)
+# [1] "numeric"
+
+#WatrCont
+class(mite_env$WatrCont)
+# [1] "numeric"
+
+#Substrate
+class(mite_env$Substrate)
+# [1] "character" -------> vogliamo sia "factor"
+
+#conversione mite_env$Substrate in factor:
+mite_env$Substrate <- factor(mite_env$Substrate, levels = c("Sphagn1", "Sphagn2", "Sphagn3", "Sphagn4", "Litter", "Barepeat", "Interface"))
+
+class(mite_env$Substrate)
+# [1] "factor"
+
+#Shrub
+class(mite_env$Shrub)
+# [1] "character" -------> vogliamo sia "factor" 
+
+#conversione mite_env$Shrub in factor 
+mite_env$Shrub <- factor(mite_env$Shrub, ordered = T, levels = c("None","Few", "Many"))
+
+class(mite_env$Shrub)                       
+# [1] "ordered" "factor"                          
+
+#Topo
+class(mite_env$Topo)
+
+#conversione mite_env$Topo in "factor"
+mite_env$Topo <- factor(mite_env$Topo, levels = c("Blanket", "Hummock"))   
+
+class(mite_env$Topo)
+# [1] "factor"
+
+
+#ora verifichiamo la struttura:
+str(mite_env)
+
+# dataset corretto:        
+mite_env
+
+
+
+#Calcolo summary e rimozione NAs
+summary(mite_env)
+
+#Righe con NAs:
+is.na(mite_env)
+#righe con NAs -> 2, 45, 50
+
+#creare nuovo mite_env senza NAs
+mite_enw <-mite_env[c(-2, -45, -50),] 
+mite_enw
+
+
+
+                         
