@@ -1,0 +1,17 @@
+
+#necessario installare il pacchetto "vegan"
+install.packages("vegan")
+library(vegan)
+
+?mite #così vedo info sul dataset 
+
+#Oribatid mite data. 70 soil cores collected by Daniel Borcard in 1989. 
+#See Borcard et al. (1992, 1994) for details.
+
+#There are three linked data sets: 
+ # mite that contains the data on 35 species of Oribatid mites, 
+ # mite.env that contains environmental data in the same sampling sites, 
+ # mite.xy that contains geographic coordinates, and mite.pcnm that contains 22 PCNM base functions (columns) computed from the geographic coordinates of the 70 sampling sites (Borcard & Legendre 2002). 
+
+#The whole sampling area was 2.5 m x 10 m in size.
+
