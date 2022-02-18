@@ -39,6 +39,7 @@ mite_env
 
 mite_csv <- read.csv("esamestat/data/mite.csv")
 mite_csv
+
 #..................................
 
 #   Quante specie?
@@ -125,5 +126,277 @@ mite_enw <-mite_env[c(-2, -45, -50),]
 mite_enw
 
 
+#5....................
 
+#Creazione grafici
+
+library(graphics)
+
+#variabili qualitative 
+
+#Substrate
+subfreq <- table(mite_enw$Substrate)
+
+barplot(subfreq,
+        main = "Frequency of substrate levels",
+        xlab = "Kind of substrate",
+        ylab = "Frequency",
+        col = "dark red")
+
+#Shrub
+shrbfreq <- table(mite_enw$Shrub)
+
+barplot(shrbfreq,
+        main = "Frequency of shrub density",
+        xlab = "Shrub cover density",
+        ylab = "Frequency",
+        col = "dark green")
                          
+#Topo
+topofreq <- table(mite_enw$Topo)
+
+barplot(topofreq,
+        main = "Frequencies of microtopographies",
+        xlab = "Microtopography",
+        ylab = "Frequency",
+        col = "blue")
+
+#variabili quantitative
+
+#Subdens
+hist(mite_enw$SubsDens,
+     xlab = "Substrate density (g/L)", 
+     main = "Substrate density histogram",
+     breaks = 5,
+     col ="magenta")
+
+
+#WatrCont
+hist(mite_enw$WatrCont,
+     xlab = "Water contenent in substrate (g/L)", 
+     main = "Substrate water content histogram",
+     breaks = 8,
+     col = "light blue")
+
+#Esportazione grafici 
+
+#export Shrub_barplot
+png("esamestat/outputs/Shrub_barplot.png", width = 2800, height = 1800, res = 300)
+
+shrbfreq <- table(mite_enw$Shrub)
+
+barplot(shrbfreq,
+        main = "Frequency of shrub density",
+        xlab = "Shrub cover density",
+        ylab = "Frequency",
+        col = "dark green")
+dev.off()
+
+#export Subdens_hist
+png("esamestat/outputs/Subdens_hist.png", width = 2800, height = 1800, res = 300)
+
+hist(mite_enw$SubsDens,
+     xlab = "Substrate density (g/L)", 
+     main = "Substrate density histogram",
+     breaks = 5,
+     col ="magenta")
+dev.off()
+
+
+#6...........................
+
+#presence/absence
+
+mite.pa <- decostand(mite_csv, method = "pa")
+mite.pa
+
+#decostand mi permette di convertire i dati in presenza/assenza
+#tramote argomento method= "pa"
+
+
+
+#7a..........................
+
+#species richness
+
+#eliminiamo righe che sono NA in Environmental variables
+
+mite_csw <- mite_csv[c(-2, -45, -50), ]
+mite_csw
+
+
+#calcolo species richness 
+specr <- specnumber(mite_csw)
+specr
+
+
+#aggiunta colonna specr
+mite_enw1 <- cbind(mite_enw, specr)
+mite_enw1
+
+
+#7b..........................
+
+#calcolare massimo minimo e media di specr
+
+max(mite_enw1$specr)
+# [1] 25
+
+min(mite_enw1$specr)
+# [1] 5
+
+mean(mite_enw1$specr)
+# [1] 15.02985
+
+
+#7c...........................
+
+
+boxplot(specr ~ Topo,
+        data = mite_enw1,
+        xlab = "Microtopography",
+        ylab = "Species richness",
+        main = "Distribution of Species Richness/Microtopography",
+        col = "dark green")
+
+
+
+# notiamo che in hummock è generalmente presente una maggiore species richness
+# blanket ha una maggiore variabilità (valori estremi più distanti)
+# blacket ha anche un outliar (valore anomalo)
+# la mediana di hummock è maggiore di blanket 
+# il 50% delle osservazioni di hummock è meno disperso rispetto a blanket
+
+png("esamestat/outputs/boxplotspecr_topo.png", width = 1800, height = 1800, res = 300)
+
+boxplot(specr ~ Topo,
+        data = mite_enw1,
+        xlab = "Microtopography",
+        ylab = "Species richness",
+        main = "Distribution of Species Richness/Microtopography",
+        col = "dark green")
+dev.off()
+
+#8............................
+
+#SubDens/SpecRich
+
+plot(specr ~ SubsDens,
+     data = mite_enw1,
+     cex = 2,
+     xlab = "Substrate density (g/l)",
+     ylab = "Species richness",
+     main = "Distribution of Species Richness/SubsDens",
+     col = "purple")
+
+
+
+
+#esporto il grafico
+
+png("esamestat/outputs/scatterplot_SR-SD.png", width = 4000, height = 1800, res = 300)
+
+plot(specr ~ SubsDens,
+     data = mite_enw1,
+     cex = 2,
+     xlab = "Substrate Density (g/l)",
+     ylab = "Species Richness",
+     main = "Distribution of Species Richness/SubsDens",
+     col = "purple")
+
+dev.off()
+
+
+#WatrCont/SpecRich
+
+plot(specr ~ WatrCont,
+     data = mite_enw1,
+     cex = 2, 
+     xlab = "Water Content (g/l)",
+     ylab = "Species Richness",
+     main = "Distribution Species Richness/Water Content",
+     col = "dark blue")
+
+#esporto il grafico
+
+png("esamestat/outputs/scatterplot_SR-WC.png", width = 4000, height = 1800, res = 300)
+
+plot(specr ~ WatrCont,
+     data = mite_enw1,
+     cex = 2, 
+     xlab = "Water Content (g/l)",
+     ylab = "Species Richness",
+     main = "Distribution Species Richness/Water Content",
+     col = "dark blue")
+
+dev.off()
+
+
+#Test per vedere se c'è correlazione tra le variabili numeriche e la Species Richness
+
+#La mia ipotesi nulla (H0) è che non c'è correlazione tra le variabili
+#Rigetto H0 quando il p value è significativo (valore piccolo) e c'è quindi correlazione
+#soglia p value -> 0.05
+
+#test per specr e Subdens
+cor.test(mite_enw1$specr, mite_enw1$SubsDens)
+
+# risultato p-value = 0.5028 -> H0 accettata (non c'è correlazione tra le due variabili)
+
+
+#test per specr e Watrcont
+cor.test(mite_enw1$specr, mite_enw1$WatrCont)
+
+# risultato p-value = 0,000000007381 -> H0 rigettata (c'è correlazione tra le due variabili)
+
+
+
+# Correlazione positiva o negativa?
+  
+  # test correlazione positiva
+  cor.test(mite_enw1$specr,
+           mite_enw1$WatrCont,
+           alternative = "greater")
+
+# p-value = 1 (no correlazione positiva)
+
+
+# test correlazione negativa
+cor.test(mite_enw1$specr,
+         mite_enw1$WatrCont,
+         alternative = "less")
+
+# p-value = 0.000000000003691 -> significativo (correlazione è negativa)
+
+
+
+# morello di regressione linearew tra WarrCont e specr e ispezione summary
+
+
+regmod <- lm(specr ~ WatrCont, data = mite_enw1)
+regmod
+
+# summary
+summary(regmod)
+
+#output:
+
+#Call:
+#  lm(formula = specr ~ WatrCont, data = mite_enw1)
+
+#Residuals:
+#  Min      1Q  Median      3Q     Max 
+#-7.9759 -2.1018  0.2023  2.3099  6.8810 
+
+#Coefficients:
+#  Estimate Std. Error t value Pr(>|t|)    
+#(Intercept) 24.38292    1.18937  20.501  < 2e-16 ***
+#  WatrCont    -0.02292    0.00275  -8.336 7.38e-12 ***
+#  ---
+#  Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+#Residual standard error: 3.231 on 65 degrees of freedom
+#Multiple R-squared:  0.5167,	Adjusted R-squared:  0.5093 
+#F-statistic: 69.49 on 1 and 65 DF,  p-value: 7.381e-12
+
+# interpretazione risultati #
