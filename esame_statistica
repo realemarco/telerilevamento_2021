@@ -5,8 +5,7 @@
 # install.packages("vegan")
 library(vegan)
 #
-# setwd("C:/esamestat") #sembra non servire #rivedere percorso setwd in ogni caso
-#
+
 
 ?mite #così vedo info sul dataset 
 
@@ -211,7 +210,7 @@ mite.pa <- decostand(mite_csv, method = "pa")
 mite.pa
 
 #decostand mi permette di convertire i dati in presenza/assenza
-#tramote argomento method= "pa"
+#tramote argomento method = "pa"
 
 
 
@@ -400,3 +399,4 @@ summary(regmod)
 #F-statistic: 69.49 on 1 and 65 DF,  p-value: 7.381e-12
 
 # interpretazione risultati #
+
