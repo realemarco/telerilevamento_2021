@@ -1,10 +1,8 @@
-
 #necessario installare il pacchetto "vegan"
-
 
 # install.packages("vegan")
 library(vegan)
-#
+
 
 
 ?mite #così vedo info sul dataset 
@@ -30,16 +28,16 @@ library(vegan)
 
 #2...........................................
 
-mite_env <- read.table("esamestat/data/mite_env.txt", header = TRUE)
+ mite_env <- read.table("data/mite_env.txt", header = TRUE)
 #header=TRUE perchè altrimenti i nomi delle variabili vengono considerati come elementi del dataset
 
 mite_env
 
 
-mite_csv <- read.csv("esamestat/data/mite.csv")
+mite_csv <- read.csv("data/mite.csv")
 mite_csv
 
-#..................................
+
 
 #   Quante specie?
 
@@ -64,6 +62,7 @@ ncol(mite_env)
 #[1] 5
 
 
+#3.......................
 
 #Controlliamo che il dataset sia organizzato come nelle info originali
 
@@ -112,20 +111,20 @@ str(mite_env)
 mite_env
 
 
-
-#Calcolo summary e rimozione NAs
+#4........................
+#Calcolo summary e rimozione NA
 summary(mite_env)
 
-#Righe con NAs:
+#Righe con NA:
 is.na(mite_env)
-#righe con NAs -> 2, 45, 50
+#righe con NA -> 2, 45, 50
 
-#creare nuovo mite_env senza NAs
+#creare nuovo mite_env senza NA
 mite_enw <-mite_env[c(-2, -45, -50),] 
 mite_enw
 
 
-#5....................
+#5.......................
 
 #Creazione grafici
 
@@ -150,7 +149,7 @@ barplot(shrbfreq,
         xlab = "Shrub cover density",
         ylab = "Frequency",
         col = "dark green")
-                         
+
 #Topo
 topofreq <- table(mite_enw$Topo)
 
@@ -180,7 +179,7 @@ hist(mite_enw$WatrCont,
 #Esportazione grafici 
 
 #export Shrub_barplot
-png("esamestat/outputs/Shrub_barplot.png", width = 2800, height = 1800, res = 300)
+png("outputs/Shrub_barplot.png", width = 2800, height = 1800, res = 300)
 
 shrbfreq <- table(mite_enw$Shrub)
 
@@ -192,7 +191,7 @@ barplot(shrbfreq,
 dev.off()
 
 #export Subdens_hist
-png("esamestat/outputs/Subdens_hist.png", width = 2800, height = 1800, res = 300)
+png("outputs/Subdens_hist.png", width = 2800, height = 1800, res = 300)
 
 hist(mite_enw$SubsDens,
      xlab = "Substrate density (g/L)", 
@@ -266,7 +265,7 @@ boxplot(specr ~ Topo,
 # la mediana di hummock è maggiore di blanket 
 # il 50% delle osservazioni di hummock è meno disperso rispetto a blanket
 
-png("esamestat/outputs/boxplotspecr_topo.png", width = 1800, height = 1800, res = 300)
+png("outputs/boxplotspecr_topo.png", width = 1800, height = 1800, res = 300)
 
 boxplot(specr ~ Topo,
         data = mite_enw1,
@@ -293,7 +292,7 @@ plot(specr ~ SubsDens,
 
 #esporto il grafico
 
-png("esamestat/outputs/scatterplot_SR-SD.png", width = 4000, height = 1800, res = 300)
+png("outputs/scatterplot_SR-SD.png", width = 4000, height = 1800, res = 300)
 
 plot(specr ~ SubsDens,
      data = mite_enw1,
@@ -318,7 +317,7 @@ plot(specr ~ WatrCont,
 
 #esporto il grafico
 
-png("esamestat/outputs/scatterplot_SR-WC.png", width = 4000, height = 1800, res = 300)
+png("outputs/scatterplot_SR-WC.png", width = 4000, height = 1800, res = 300)
 
 plot(specr ~ WatrCont,
      data = mite_enw1,
@@ -351,11 +350,11 @@ cor.test(mite_enw1$specr, mite_enw1$WatrCont)
 
 
 # Correlazione positiva o negativa?
-  
-  # test correlazione positiva
-  cor.test(mite_enw1$specr,
-           mite_enw1$WatrCont,
-           alternative = "greater")
+
+# test correlazione positiva
+cor.test(mite_enw1$specr,
+         mite_enw1$WatrCont,
+         alternative = "greater")
 
 # p-value = 1 (no correlazione positiva)
 
@@ -369,7 +368,7 @@ cor.test(mite_enw1$specr,
 
 
 
-# morello di regressione linearew tra WarrCont e specr e ispezione summary
+# morello di regressione lineare tra WatrCont e specr + ispezione summary
 
 
 regmod <- lm(specr ~ WatrCont, data = mite_enw1)
