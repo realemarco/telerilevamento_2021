@@ -1,4 +1,6 @@
 #necessario installare il pacchetto "vegan"
+#Community Ecology Package:
+#funzioni per diversity analysis, community ordination and dissimilarity analysis
 
 # install.packages("vegan")
 library(vegan)
@@ -28,13 +30,15 @@ library(vegan)
 
 #2...........................................
 
- mite_env <- read.table("data/mite_env.txt", header = TRUE)
+mite_env <- read.table("data/mite_env.txt", header = TRUE)
+#read.table per importare dati tabellari
 #header=TRUE perchè altrimenti i nomi delle variabili vengono considerati come elementi del dataset
 
 mite_env
 
 
 mite_csv <- read.csv("data/mite.csv")
+#read.csv per importare dati cvs
 mite_csv
 
 
@@ -96,6 +100,7 @@ class(mite_env$Shrub)
 
 #Topo
 class(mite_env$Topo)
+# [1] "character" ---> vogliamo sia "factor"
 
 #conversione mite_env$Topo in "factor"
 mite_env$Topo <- factor(mite_env$Topo, levels = c("Blanket", "Hummock"))   
@@ -107,6 +112,13 @@ class(mite_env$Topo)
 #ora verifichiamo la struttura:
 str(mite_env)
 
+#'data.frame':	70 obs. of  5 variables:
+# $ SubsDens : num  39.2 55 46.1 48.2 23.6 ...
+# $ WatrCont : num  350 435 372 360 204 ...
+# $ Substrate: Factor w/ 7 levels "Sphagn1","Sphagn2",..: 1 5 7 1 1 1 1 7 5 1 ...
+# $ Shrub    : Ord.factor w/ 3 levels "None"<"Few"<"Many": 2 NA 2 2 2 2 2 3 3 3 ...
+# $ Topo     : Factor w/ 2 levels "Blanket","Hummock": 2 2 2 2 2 2 2 1 1 2 ...
+
 # dataset corretto:        
 mite_env
 
@@ -115,8 +127,19 @@ mite_env
 #Calcolo summary e rimozione NA
 summary(mite_env)
 
+#output:
+ #   SubsDens        WatrCont         Substrate   Shrub         Topo   
+ # Min.   :21.17   Min.   :134.1   Interface:26   None:19   Blanket:43  
+ # 1st Qu.:30.01   1st Qu.:314.1   Sphagn1  :25   Few :25   Hummock:26  
+ # Median :36.38   Median :398.5   Sphagn2  :11   Many:25   NA's   : 1  
+ # Mean   :39.28   Mean   :410.6   Sphagn4  : 2   NA's: 1               
+ # 3rd Qu.:46.81   3rd Qu.:492.8   Litter   : 2                         
+ # Max.   :80.59   Max.   :827.0   (Other)  : 3                         
+ # NA's     : 1                
+
 #Righe con NA:
 is.na(mite_env)
+
 #righe con NA -> 2, 45, 50
 
 #creare nuovo mite_env senza NA
@@ -134,7 +157,7 @@ library(graphics)
 
 #Substrate
 subfreq <- table(mite_enw$Substrate)
-
+#funzione table per creare tabelle di contingenza
 barplot(subfreq,
         main = "Frequency of substrate levels",
         xlab = "Kind of substrate",
@@ -178,11 +201,10 @@ hist(mite_enw$WatrCont,
 
 #Esportazione grafici 
 
-#export Shrub_barplot
+#esportazione Shrub_barplot
 png("outputs/Shrub_barplot.png", width = 2800, height = 1800, res = 300)
 
 shrbfreq <- table(mite_enw$Shrub)
-
 barplot(shrbfreq,
         main = "Frequency of shrub density",
         xlab = "Shrub cover density",
@@ -190,7 +212,18 @@ barplot(shrbfreq,
         col = "dark green")
 dev.off()
 
-#export Subdens_hist
+#esportazione Topo_barplot
+png("outputs/Topo_barplot.png", width = 2800, height = 1800, res = 300)
+
+topofreq <- table(mite_enw$Topo)
+barplot(topofreq,
+        main = "Frequencies of microtopographies",
+        xlab = "Microtopography",
+        ylab = "Frequency",
+        col = "blue")
+dev.off()
+
+#esportazione Subdens_hist
 png("outputs/Subdens_hist.png", width = 2800, height = 1800, res = 300)
 
 hist(mite_enw$SubsDens,
@@ -200,10 +233,21 @@ hist(mite_enw$SubsDens,
      col ="magenta")
 dev.off()
 
+#esportazione WatrCont_hist
+png("outputs/WatrCont_hist.png", width = 2800, height = 1800, res = 300)
+
+hist(mite_enw$WatrCont,
+     xlab = "Water contenent in substrate (g/L)", 
+     main = "Substrate water content histogram",
+     breaks = 8,
+     col = "light blue")
+dev.off()
 
 #6...........................
 
 #presence/absence
+#la nostra community matrix non è organizzata in presence/absence
+#procediamo a convertirla
 
 mite.pa <- decostand(mite_csv, method = "pa")
 mite.pa
@@ -223,13 +267,13 @@ mite_csw <- mite_csv[c(-2, -45, -50), ]
 mite_csw
 
 
-#calcolo species richness 
-specr <- specnumber(mite_csw)
-specr
+#calcolo species richness con funzione "specnumber"
+SpecR <- specnumber(mite_csw)
+SpecR
 
 
-#aggiunta colonna specr
-mite_enw1 <- cbind(mite_enw, specr)
+#aggiunta colonna specr con funzione "cbind"
+mite_enw1 <- cbind(mite_enw, SpecR)
 mite_enw1
 
 
@@ -237,20 +281,20 @@ mite_enw1
 
 #calcolare massimo minimo e media di specr
 
-max(mite_enw1$specr)
+max(mite_enw1$SpecR)
 # [1] 25
 
-min(mite_enw1$specr)
+min(mite_enw1$SpecR)
 # [1] 5
 
-mean(mite_enw1$specr)
+mean(mite_enw1$SpecR)
 # [1] 15.02985
 
 
 #7c...........................
 
 
-boxplot(specr ~ Topo,
+boxplot(SpecR ~ Topo,
         data = mite_enw1,
         xlab = "Microtopography",
         ylab = "Species richness",
@@ -267,7 +311,7 @@ boxplot(specr ~ Topo,
 
 png("outputs/boxplotspecr_topo.png", width = 1800, height = 1800, res = 300)
 
-boxplot(specr ~ Topo,
+boxplot(SpecR ~ Topo,
         data = mite_enw1,
         xlab = "Microtopography",
         ylab = "Species richness",
@@ -279,7 +323,7 @@ dev.off()
 
 #SubDens/SpecRich
 
-plot(specr ~ SubsDens,
+plot(SpecR ~ SubsDens,
      data = mite_enw1,
      cex = 2,
      xlab = "Substrate density (g/l)",
@@ -294,7 +338,7 @@ plot(specr ~ SubsDens,
 
 png("outputs/scatterplot_SR-SD.png", width = 4000, height = 1800, res = 300)
 
-plot(specr ~ SubsDens,
+plot(SpecR ~ SubsDens,
      data = mite_enw1,
      cex = 2,
      xlab = "Substrate Density (g/l)",
@@ -307,7 +351,7 @@ dev.off()
 
 #WatrCont/SpecRich
 
-plot(specr ~ WatrCont,
+plot(SpecR ~ WatrCont,
      data = mite_enw1,
      cex = 2, 
      xlab = "Water Content (g/l)",
@@ -319,7 +363,7 @@ plot(specr ~ WatrCont,
 
 png("outputs/scatterplot_SR-WC.png", width = 4000, height = 1800, res = 300)
 
-plot(specr ~ WatrCont,
+plot(SpecR ~ WatrCont,
      data = mite_enw1,
      cex = 2, 
      xlab = "Water Content (g/l)",
@@ -337,13 +381,13 @@ dev.off()
 #soglia p value -> 0.05
 
 #test per specr e Subdens
-cor.test(mite_enw1$specr, mite_enw1$SubsDens)
+cor.test(mite_enw1$SpecR, mite_enw1$SubsDens)
 
 # risultato p-value = 0.5028 -> H0 accettata (non c'è correlazione tra le due variabili)
 
 
 #test per specr e Watrcont
-cor.test(mite_enw1$specr, mite_enw1$WatrCont)
+cor.test(mite_enw1$SpecR, mite_enw1$WatrCont)
 
 # risultato p-value = 0,000000007381 -> H0 rigettata (c'è correlazione tra le due variabili)
 
@@ -352,7 +396,7 @@ cor.test(mite_enw1$specr, mite_enw1$WatrCont)
 # Correlazione positiva o negativa?
 
 # test correlazione positiva
-cor.test(mite_enw1$specr,
+cor.test(mite_enw1$SpecR,
          mite_enw1$WatrCont,
          alternative = "greater")
 
@@ -360,7 +404,7 @@ cor.test(mite_enw1$specr,
 
 
 # test correlazione negativa
-cor.test(mite_enw1$specr,
+cor.test(mite_enw1$SpecR,
          mite_enw1$WatrCont,
          alternative = "less")
 
@@ -368,10 +412,10 @@ cor.test(mite_enw1$specr,
 
 
 
-# morello di regressione lineare tra WatrCont e specr + ispezione summary
+# modello di regressione lineare tra WatrCont e specr + ispezione summary
 
 
-regmod <- lm(specr ~ WatrCont, data = mite_enw1)
+regmod <- lm(SpecR ~ WatrCont, data = mite_enw1)
 regmod
 
 # summary
