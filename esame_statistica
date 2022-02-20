@@ -424,7 +424,7 @@ summary(regmod)
 #output:
 
 #Call:
-#  lm(formula = specr ~ WatrCont, data = mite_enw1)
+#  lm(formula = SpecR ~ WatrCont, data = mite_env3)
 
 #Residuals:
 #  Min      1Q  Median      3Q     Max 
@@ -442,4 +442,20 @@ summary(regmod)
 #F-statistic: 69.49 on 1 and 65 DF,  p-value: 7.381e-12
 
 # interpretazione risultati #
+
+
+
+
+se l'intercetta corrsiponde a 24.27, significa che questo è la SR quando acqua è a 0
+valore sotto: all'aumentare di watercont, la SR in media diminuisce di 0.00etc. 
+
+
+coefficienti: intercettta e B1 
+errori: errori associati ed elementi del modello
+Pr: livello di significatività dei valori (entrambi valori piccoli, quindi molto significativo)
+
+rsuqrd: 48% della varianza è spiegata dal modello.(un buon modello).
+
+
+
 
