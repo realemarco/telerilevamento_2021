@@ -143,8 +143,8 @@ is.na(mite_env)
 #righe con NA -> 2, 45, 50
 
 #creare nuovo mite_env senza NA
-mite_enw <-mite_env[c(-2, -45, -50),] 
-mite_enw
+mite_env2 <-mite_env[c(-2, -45, -50),] 
+mite_env2
 
 
 #5.......................
@@ -156,7 +156,7 @@ library(graphics)
 #variabili qualitative 
 
 #Substrate
-subfreq <- table(mite_enw$Substrate)
+subfreq <- table(mite_env2$Substrate)
 #funzione table per creare tabelle di contingenza
 barplot(subfreq,
         main = "Frequency of substrate levels",
@@ -165,7 +165,7 @@ barplot(subfreq,
         col = "dark red")
 
 #Shrub
-shrbfreq <- table(mite_enw$Shrub)
+shrbfreq <- table(mite_env2$Shrub)
 
 barplot(shrbfreq,
         main = "Frequency of shrub density",
@@ -174,7 +174,7 @@ barplot(shrbfreq,
         col = "dark green")
 
 #Topo
-topofreq <- table(mite_enw$Topo)
+topofreq <- table(mite_env2$Topo)
 
 barplot(topofreq,
         main = "Frequencies of microtopographies",
@@ -185,7 +185,7 @@ barplot(topofreq,
 #variabili quantitative
 
 #Subdens
-hist(mite_enw$SubsDens,
+hist(mite_env2$SubsDens,
      xlab = "Substrate density (g/L)", 
      main = "Substrate density histogram",
      breaks = 5,
@@ -193,7 +193,7 @@ hist(mite_enw$SubsDens,
 
 
 #WatrCont
-hist(mite_enw$WatrCont,
+hist(mite_env2$WatrCont,
      xlab = "Water contenent in substrate (g/L)", 
      main = "Substrate water content histogram",
      breaks = 8,
@@ -204,7 +204,7 @@ hist(mite_enw$WatrCont,
 #esportazione Shrub_barplot
 png("outputs/Shrub_barplot.png", width = 2800, height = 1800, res = 300)
 
-shrbfreq <- table(mite_enw$Shrub)
+shrbfreq <- table(mite_env2$Shrub)
 barplot(shrbfreq,
         main = "Frequency of shrub density",
         xlab = "Shrub cover density",
@@ -215,7 +215,7 @@ dev.off()
 #esportazione Topo_barplot
 png("outputs/Topo_barplot.png", width = 2800, height = 1800, res = 300)
 
-topofreq <- table(mite_enw$Topo)
+topofreq <- table(mite_env2$Topo)
 barplot(topofreq,
         main = "Frequencies of microtopographies",
         xlab = "Microtopography",
@@ -226,7 +226,7 @@ dev.off()
 #esportazione Subdens_hist
 png("outputs/Subdens_hist.png", width = 2800, height = 1800, res = 300)
 
-hist(mite_enw$SubsDens,
+hist(mite_env2$SubsDens,
      xlab = "Substrate density (g/L)", 
      main = "Substrate density histogram",
      breaks = 5,
@@ -236,7 +236,7 @@ dev.off()
 #esportazione WatrCont_hist
 png("outputs/WatrCont_hist.png", width = 2800, height = 1800, res = 300)
 
-hist(mite_enw$WatrCont,
+hist(mite_env2$WatrCont,
      xlab = "Water contenent in substrate (g/L)", 
      main = "Substrate water content histogram",
      breaks = 8,
@@ -263,28 +263,28 @@ mite.pa
 
 #eliminiamo righe che sono NA in Environmental variables
 
-mite_csw <- mite_csv[c(-2, -45, -50), ]
-mite_csw
+mite_csv2 <- mite_csv[c(-2, -45, -50), ]
+mite_csv2
 
 
 #calcolo species richness con funzione "specnumber"
-SpecR <- specnumber(mite_csw)
+SpecR <- specnumber(mite_csv2)
 SpecR
 
 
 #aggiunta colonna specr con funzione "cbind"
-mite_enw1 <- cbind(mite_enw, SpecR)
-mite_enw1
+mite_env3 <- cbind(mite_env2, SpecR)
+mite_env3
 
 
 #7b..........................
 
 #calcolare massimo minimo e media di specr
 
-max(mite_enw1$SpecR)
+max(mite_env3$SpecR)
 # [1] 25
 
-min(mite_enw1$SpecR)
+min(mite_env3$SpecR)
 # [1] 5
 
 mean(mite_enw1$SpecR)
@@ -295,7 +295,7 @@ mean(mite_enw1$SpecR)
 
 
 boxplot(SpecR ~ Topo,
-        data = mite_enw1,
+        data = mite_env3,
         xlab = "Microtopography",
         ylab = "Species richness",
         main = "Distribution of Species Richness/Microtopography",
@@ -312,7 +312,7 @@ boxplot(SpecR ~ Topo,
 png("outputs/boxplotspecr_topo.png", width = 1800, height = 1800, res = 300)
 
 boxplot(SpecR ~ Topo,
-        data = mite_enw1,
+        data = mite_env3,
         xlab = "Microtopography",
         ylab = "Species richness",
         main = "Distribution of Species Richness/Microtopography",
@@ -324,7 +324,7 @@ dev.off()
 #SubDens/SpecRich
 
 plot(SpecR ~ SubsDens,
-     data = mite_enw1,
+     data = mite_env3,
      cex = 2,
      xlab = "Substrate density (g/l)",
      ylab = "Species richness",
@@ -339,7 +339,7 @@ plot(SpecR ~ SubsDens,
 png("outputs/scatterplot_SR-SD.png", width = 4000, height = 1800, res = 300)
 
 plot(SpecR ~ SubsDens,
-     data = mite_enw1,
+     data = mite_env3,
      cex = 2,
      xlab = "Substrate Density (g/l)",
      ylab = "Species Richness",
@@ -352,7 +352,7 @@ dev.off()
 #WatrCont/SpecRich
 
 plot(SpecR ~ WatrCont,
-     data = mite_enw1,
+     data = mite_env3,
      cex = 2, 
      xlab = "Water Content (g/l)",
      ylab = "Species Richness",
@@ -364,7 +364,7 @@ plot(SpecR ~ WatrCont,
 png("outputs/scatterplot_SR-WC.png", width = 4000, height = 1800, res = 300)
 
 plot(SpecR ~ WatrCont,
-     data = mite_enw1,
+     data = mite_env3,
      cex = 2, 
      xlab = "Water Content (g/l)",
      ylab = "Species Richness",
@@ -381,13 +381,13 @@ dev.off()
 #soglia p value -> 0.05
 
 #test per specr e Subdens
-cor.test(mite_enw1$SpecR, mite_enw1$SubsDens)
+cor.test(mite_env3$SpecR, mite_env3$SubsDens)
 
 # risultato p-value = 0.5028 -> H0 accettata (non c'è correlazione tra le due variabili)
 
 
 #test per specr e Watrcont
-cor.test(mite_enw1$SpecR, mite_enw1$WatrCont)
+cor.test(mite_env3$SpecR, mite_env3$WatrCont)
 
 # risultato p-value = 0,000000007381 -> H0 rigettata (c'è correlazione tra le due variabili)
 
@@ -396,16 +396,16 @@ cor.test(mite_enw1$SpecR, mite_enw1$WatrCont)
 # Correlazione positiva o negativa?
 
 # test correlazione positiva
-cor.test(mite_enw1$SpecR,
-         mite_enw1$WatrCont,
+cor.test(mite_env3$SpecR,
+         mite_env3$WatrCont,
          alternative = "greater")
 
 # p-value = 1 (no correlazione positiva)
 
 
 # test correlazione negativa
-cor.test(mite_enw1$SpecR,
-         mite_enw1$WatrCont,
+cor.test(mite_env3$SpecR,
+         mite_env3$WatrCont,
          alternative = "less")
 
 # p-value = 0.000000000003691 -> significativo (correlazione è negativa)
@@ -415,7 +415,7 @@ cor.test(mite_enw1$SpecR,
 # modello di regressione lineare tra WatrCont e specr + ispezione summary
 
 
-regmod <- lm(SpecR ~ WatrCont, data = mite_enw1)
+regmod <- lm(SpecR ~ WatrCont, data = mite_env3)
 regmod
 
 # summary
